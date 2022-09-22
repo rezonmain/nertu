@@ -5,6 +5,7 @@ import usePitch, { Pitch, DEFUALT_PITCH } from '../../lib/hooks/usePitch';
 import LinearTuner from '../LinearTuningLane/LinearTuningLane';
 import ToneGenerator from '../ToneGenerator/ToneGenerator';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
+import CurvedTuningLane from '../CurvedTuningLane/CurvedTuningLane';
 
 export interface TunerData extends Note, Pitch {}
 
@@ -21,7 +22,7 @@ function Tuner() {
 		const pitch = getPitch(0.9);
 		const note = tet.frequencyToNote(pitch.frequency);
 		note ? setStore({ ...note, ...pitch }) : setStore(undefined);
-	}, 150);
+	}, 100);
 
 	if (!media) {
 		return <button onClick={() => getMedia()}>Click to use microphone</button>;

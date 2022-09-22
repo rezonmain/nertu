@@ -1,6 +1,13 @@
 import { animated, useSpring } from '@react-spring/web';
+import { Note, NoteName } from '../../lib/classes/TET';
 import { TunerData } from '../Tuner/Tuner';
-const CurvedTuningLane = ({ data }: { data: TunerData | undefined }) => {
+const CurvedTuningLane = ({
+	data,
+	color,
+}: {
+	data: TunerData | undefined;
+	color: string;
+}) => {
 	/*
 	 offset = 15.5 when cents = -50
 	 offset = -15.5 when cents = 50
@@ -17,6 +24,7 @@ const CurvedTuningLane = ({ data }: { data: TunerData | undefined }) => {
 	*/
 	let x = 163;
 	let y = 16;
+
 	const props = useSpring({
 		to: { opacity: data ? 1 : 0 },
 		from: { opacity: 0 },
@@ -29,7 +37,13 @@ const CurvedTuningLane = ({ data }: { data: TunerData | undefined }) => {
 	}
 
 	return (
-		<div className='w-full h-fit mx-auto max-w-md'>
+		<div className='w-full h-fit mx-auto max-w-md flex flex-col'>
+			<div
+				id='freq-indicator'
+				className='text-center text-stone-500 text-xl mb-10'
+			>
+				{data ? <p>{data.frequency.toFixed(2)} hz</p> : <p>- hz</p>}
+			</div>
 			<svg
 				xmlns='http://www.w3.org/2000/svg'
 				fill='none'
@@ -52,10 +66,15 @@ const CurvedTuningLane = ({ data }: { data: TunerData | undefined }) => {
 						cy={`${y}`}
 						style={props}
 						r='14.5'
-						fill='#fff'
+						fill={color}
 					></animated.circle>
 				</g>
 			</svg>
+			{/* <NoteIndicator note={data?.noteName} octave={data?.octave} /> */}
+			<animated.span
+				id='cents-indicator'
+				className='inline-block absolute mb-16 -translate-x-1/2 text-center text-stone-500'
+			></animated.span>
 		</div>
 	);
 };

@@ -7,7 +7,6 @@ function App() {
 	return (
 		<Layout>
 			<>
-				<ToneGenerator />
 				<Tuner />
 			</>
 		</Layout>
