@@ -1,23 +1,32 @@
 import { animated, useSpring } from '@react-spring/web';
-import { TunerData } from '../../App';
-const TuningLane = ({ data }: { data: TunerData }) => {
+import { TunerData } from '../Tuner/Tuner';
+const CurvedTuningLane = ({ data }: { data: TunerData | undefined }) => {
 	/*
 	 offset = 15.5 when cents = -50
 	 offset = -15.5 when cents = 50
 	 m = y2 - y1 / x2 - x2 so:
 	 (-15.5 - 15.5) / (50 - -50) = -0.31,
    b = 1.4 (to center indicator)
-	 */
-	const offset = data.cents * -0.31 + 1.4;
-	/*
-    For x position:
+
+   For x position:
 	 increments = 326.5 (viewBox x) / 101 (-50 to 50),
 	 adjustedCents = cents + 50 (so 0 is leftmost), so:
 	 x = increments * adjustedCents + offset
-	 */
-	const x = (326.5 / 101) * (data.cents + 50) + offset;
-	// For y position: closets parabola eq:
-	const y = 0.027 * data.cents ** 2 + 16;
+
+	 For y position: closest parabola eq
+	*/
+	let x = 163;
+	let y = 16;
+	const props = useSpring({
+		to: { opacity: data ? 1 : 0 },
+		from: { opacity: 0 },
+	});
+
+	if (data) {
+		const offset = data && data.cents * -0.31 + 1.4;
+		x = data && (326.5 / 101) * (data.cents + 50) + offset;
+		y = 0.00318426 * x ** 2 - 1.03828 * x + 100.638;
+	}
 
 	return (
 		<div className='w-full h-fit mx-auto max-w-md'>
@@ -39,9 +48,9 @@ const TuningLane = ({ data }: { data: TunerData }) => {
 						d='M163.355 16c5.097 0 10.148.195 15.145.579C232.1 20.688 279.569 46.433 312 85M163.645 16c-5.437 0-10.822.222-16.145.658C94.31 21.01 47.229 46.674 15 85'
 					></path>
 					<animated.circle
-						cy={`${y}`}
 						cx={`${x}`}
-						// {...propsY}
+						cy={`${y}`}
+						style={props}
 						r='14.5'
 						fill='#fff'
 					></animated.circle>
@@ -51,4 +60,4 @@ const TuningLane = ({ data }: { data: TunerData }) => {
 	);
 };
 
-export default TuningLane;
+export default CurvedTuningLane;
