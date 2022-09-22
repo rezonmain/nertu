@@ -2,7 +2,7 @@ import { TunerData } from '../Tuner/Tuner';
 import { animated, useSpring } from '@react-spring/web';
 import NoteIndicator from '../NoteIndicator/NoteIndicator';
 
-const LinearTuner = ({
+const LinearTuningLane = ({
 	data,
 	color,
 }: {
@@ -62,4 +62,4 @@ const LinearTuner = ({
 		</div>
 	);
 };
-export default LinearTuner;
+export default LinearTuningLane;

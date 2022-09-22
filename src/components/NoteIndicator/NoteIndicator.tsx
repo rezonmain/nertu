@@ -4,9 +4,11 @@ import TET, { NoteName } from '../../lib/classes/TET';
 const NoteIndicator = ({
 	note,
 	octave,
+	as = 'linear',
 }: {
 	note: NoteName | undefined;
 	octave: number | undefined;
+	as?: 'linear' | 'curved';
 }) => {
 	const noteIndicatorProps = useSpring({
 		to: {
@@ -19,7 +21,9 @@ const NoteIndicator = ({
 		<animated.div
 			id='note-indicator'
 			style={noteIndicatorProps}
-			className='h-[100px] self-center'
+			className={`h-[100px] self-center ${
+				as === 'curved' ? '-translate-y-10' : ''
+			}`}
 		>
 			<div
 				className={`flex flex-col gap-7 -rotate-45 ${

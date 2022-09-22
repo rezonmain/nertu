@@ -2,10 +2,9 @@ import { useInterval } from 'react-use';
 import { useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
 import usePitch, { Pitch, DEFUALT_PITCH } from '../../lib/hooks/usePitch';
-import LinearTuner from '../LinearTuningLane/LinearTuningLane';
-import ToneGenerator from '../ToneGenerator/ToneGenerator';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
 import CurvedTuningLane from '../CurvedTuningLane/CurvedTuningLane';
+import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
 
 export interface TunerData extends Note, Pitch {}
 
@@ -31,7 +30,9 @@ function Tuner() {
 	return (
 		<>
 			{media ? (
-				<LinearTuner data={store} color={color} />
+				<>
+					<LinearTuningLane data={store} color={color} />
+				</>
 			) : (
 				<button onClick={() => getMedia()}>Click to use microphone</button>
 			)}

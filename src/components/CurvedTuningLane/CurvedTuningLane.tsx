@@ -1,5 +1,5 @@
 import { animated, useSpring } from '@react-spring/web';
-import { Note, NoteName } from '../../lib/classes/TET';
+import NoteIndicator from '../NoteIndicator/NoteIndicator';
 import { TunerData } from '../Tuner/Tuner';
 const CurvedTuningLane = ({
 	data,
@@ -70,7 +70,7 @@ const CurvedTuningLane = ({
 					></animated.circle>
 				</g>
 			</svg>
-			{/* <NoteIndicator note={data?.noteName} octave={data?.octave} /> */}
+			<NoteIndicator note={data?.noteName} octave={data?.octave} as='curved' />
 			<animated.span
 				id='cents-indicator'
 				className='inline-block absolute mb-16 -translate-x-1/2 text-center text-stone-500'

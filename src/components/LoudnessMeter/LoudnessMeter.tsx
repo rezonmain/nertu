@@ -1,6 +1,6 @@
 import { animated, useSpring } from '@react-spring/web';
 import { useRef } from 'react';
-import constrain from '../../lib/constrain';
+import constrain from '../../lib/utils/constrain';
 
 const LoudnessMeter = ({
 	loudness,
@@ -23,7 +23,7 @@ const LoudnessMeter = ({
 	prev.current = w;
 
 	return (
-		<div className='flex flex-col gap-4 mx-auto'>
+		<div className='flex flex-col gap-4 mx-auto max-w-md'>
 			<div>
 				<svg
 					viewBox='0 0 263 32'
