@@ -1,6 +1,6 @@
 const Layout = ({ children }: { children: JSX.Element }) => {
 	return (
-		<div className='w-full h-screen bg-stone-900 font-mono text-white'>
+		<div className='w-full h-screen bg-stone-800 font-mono text-white'>
 			{children}
 		</div>
 	);

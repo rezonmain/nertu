@@ -19,7 +19,7 @@ const LinearTuner = ({ data }: { data: TunerData | undefined }) => {
 	return (
 		<div
 			id='tuner-container'
-			className='h-full w-3/4 mx-auto flex flex-col justify-center gap-14'
+			className=' w-full mx-auto flex flex-col justify-center gap-14'
 		>
 			<div id='freq-indicator' className='text-center text-stone-500 text-xl'>
 				{data ? <p>{data.frequency.toFixed(2)} hz</p> : <p>- hz</p>}

@@ -2,9 +2,9 @@ import { useInterval } from 'react-use';
 import { useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
 import usePitch, { Pitch, DEFUALT_PITCH } from '../../lib/hooks/usePitch';
-import CurvedTuningLane from '../CurvedTuningLane/CurvedTuningLane';
-import Layout from '../Layout/Layout';
 import LinearTuner from '../LinearTuningLane/LinearTuningLane';
+import ToneGenerator from '../ToneGenerator/ToneGenerator';
+import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
 
 export interface TunerData extends Note, Pitch {}
 
@@ -28,9 +28,10 @@ function Tuner() {
 	}
 
 	return (
-		<Layout>
+		<>
 			<LinearTuner data={store} />
-		</Layout>
+			<LoudnessMeter loudness={store?.loudness} />
+		</>
 	);
 }
 
