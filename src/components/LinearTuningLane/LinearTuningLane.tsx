@@ -32,8 +32,13 @@ const LinearTuner = ({ data }: { data: TunerData | undefined }) => {
 				<div className='outline outline-stone-300 h-7 aspect-square rounded-full'></div>
 				<div className='border border-stone-300 w-full h-0'></div>
 				<animated.span
-					style={tunerIndicatorProps}
-					className={`z-10 absolute inline-block aspect-square h-7 rounded-full -translate-x-1/2 bg-red-400`}
+					style={{
+						...tunerIndicatorProps,
+						backgroundColor: `hsl(${
+							data ? -Math.abs(data!.cents * 3) + 142 : 142
+						},69%, 58%)`,
+					}}
+					className='z-10 absolute inline-block aspect-square h-7 rounded-full -translate-x-1/2 transition-colors'
 				></animated.span>
 			</div>
 			<animated.div style={noteIndicatorProps} className='self-center'>
