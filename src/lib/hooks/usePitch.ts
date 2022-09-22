@@ -46,9 +46,7 @@ const usePitch = (existingAudioContext?: AudioContext) => {
 			let sum = input.reduce((prev, curr) => prev + curr * curr);
 			sum = sum < 0 ? 0.00001 : sum;
 			const rms = Math.sqrt(sum / input.length);
-			console.log('rms', rms);
 			loudness = 20 * (Math.log(rms) / Math.log(10));
-			console.log('loud', loudness);
 			pitch = res[1] >= minClarity ? res : pitch;
 		}
 		return {
