@@ -1,7 +1,13 @@
 import { animated, useSpring } from '@react-spring/web';
 import { useRef } from 'react';
 
-const LoudnessMeter = ({ loudness }: { loudness: number | undefined }) => {
+const LoudnessMeter = ({
+	loudness,
+	color,
+}: {
+	loudness: number | undefined;
+	color: string;
+}) => {
 	const prev = useRef(0);
 	loudness = loudness ?? -90;
 	const w = (263 / 90) * loudness + 263;
@@ -20,7 +26,12 @@ const LoudnessMeter = ({ loudness }: { loudness: number | undefined }) => {
 					<clipPath id='shell-clip'>
 						<animated.rect x='0' y='0' {...wProp} height='32' />
 					</clipPath>
-					<use clipPath='url(#shell-clip)' href='#shell' fill='green' />
+					<use
+						clipPath='url(#shell-clip)'
+						href='#shell'
+						fill={color}
+						className='transition-colors'
+					/>
 				</svg>
 			</div>
 			<div className='flex flex-row justify-between text-neutral-500'>

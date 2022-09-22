@@ -6,7 +6,10 @@ import Tuner from './components/Tuner/Tuner';
 function App() {
 	return (
 		<Layout>
-			<Tuner />
+			<>
+				<ToneGenerator />
+				<Tuner />
+			</>
 		</Layout>
 	);
 }

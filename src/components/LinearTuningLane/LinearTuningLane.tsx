@@ -1,7 +1,13 @@
 import { TunerData } from '../Tuner/Tuner';
 import { animated, useSpring } from '@react-spring/web';
 
-const LinearTuner = ({ data }: { data: TunerData | undefined }) => {
+const LinearTuner = ({
+	data,
+	color,
+}: {
+	data: TunerData | undefined;
+	color: string;
+}) => {
 	const tunerIndicatorProps = useSpring({
 		to: {
 			left: data ? `${data.cents + 50}%` : '50%',
@@ -42,9 +48,7 @@ const LinearTuner = ({ data }: { data: TunerData | undefined }) => {
 					id='tuning-indicator'
 					style={{
 						...tunerIndicatorProps,
-						backgroundColor: `hsl(${
-							data ? -Math.abs(data!.cents * 3) + 142 : 142
-						}, 69%, 58%)`,
+						backgroundColor: color,
 					}}
 					className='z-10 absolute inline-block aspect-square h-7 rounded-full -translate-x-1/2 transition-colors'
 				></animated.span>
