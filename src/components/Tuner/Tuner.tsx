@@ -24,17 +24,18 @@ function Tuner() {
 		note ? setStore({ ...note, ...pitch }) : setStore(undefined);
 	}, 100);
 
-	if (!media) {
-		return <button onClick={() => getMedia()}>Click to use microphone</button>;
-	}
-
 	const color = `hsl(${
 		store ? -Math.abs(store!.cents * 3) + 142 : 142
 	}, 69%, 58%)`;
 
 	return (
 		<>
-			<LinearTuner data={store} color={color} />
+			{media ? (
+				<LinearTuner data={store} color={color} />
+			) : (
+				<button onClick={() => getMedia()}>Click to use microphone</button>
+			)}
+
 			<LoudnessMeter loudness={store?.loudness} color={color} />
 		</>
 	);

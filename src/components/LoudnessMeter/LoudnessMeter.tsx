@@ -1,18 +1,27 @@
 import { animated, useSpring } from '@react-spring/web';
 import { useRef } from 'react';
+import constrain from '../../lib/constrain';
 
 const LoudnessMeter = ({
 	loudness,
 	color,
+	range = { min: -60, max: 0 },
 }: {
 	loudness: number | undefined;
 	color: string;
+	range?: { min: number; max: number };
 }) => {
 	const prev = useRef(0);
-	loudness = loudness ?? -90;
-	const w = (263 / 90) * loudness + 263;
+
+	loudness = loudness ?? range.min;
+
+	let w = (263 / Math.abs(range.max - range.min)) * loudness + 263;
+	w = constrain(0, 263, w);
+
 	const wProp = useSpring({ to: { width: w }, from: { width: prev.current } });
+
 	prev.current = w;
+
 	return (
 		<div className='flex flex-col gap-4 mx-auto'>
 			<div>
@@ -35,8 +44,8 @@ const LoudnessMeter = ({
 				</svg>
 			</div>
 			<div className='flex flex-row justify-between text-neutral-500'>
-				<span>-90dB</span>
-				<span>0dB</span>
+				<span>{range.min}dB</span>
+				<span>{range.max}dB</span>
 			</div>
 		</div>
 	);
