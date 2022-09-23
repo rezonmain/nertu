@@ -30,14 +30,14 @@ const NoteIndicator = ({
 					enharmonic ? '-translate-y-3' : ''
 				}`}
 			>
-				<p className='text-5xl block rotate-45'>
+				<p className='text-5xl block rotate-45 font-music'>
 					{note}
 					<sub className='text-xl'>{octave}</sub>
 				</p>
 				{enharmonic && (
 					<>
 						<hr className='border-stone-500' />
-						<p className='text-4xl block rotate-45 text-stone-500 translate-x-4 -translate-y-1'>
+						<p className='text-4xl block rotate-45 text-stone-500 translate-x-4 -translate-y-1 font-music'>
 							{enharmonic}
 							<sub className='text-lg'>{octave}</sub>
 						</p>
