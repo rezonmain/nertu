@@ -1,10 +1,11 @@
 import { useInterval } from 'react-use';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
 import usePitch, { Pitch } from '../../lib/hooks/usePitch';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
 import PermissionModal from '../PermissionModal/PermissionModal';
 import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
+import Header from '../Header/Header';
 
 export interface TunerData extends Note, Pitch {}
 
@@ -31,9 +32,14 @@ function Tuner() {
 
 	return (
 		<>
-			{!media && <PermissionModal onAsk={onAsk} />}
-			<LinearTuningLane data={store} color={color} />
-			<LoudnessMeter loudness={store?.loudness} color={color} />
+			<div
+				id='content'
+				className='px-10 my-auto h-screen flex flex-col justify-center'
+			>
+				{!media && <PermissionModal onAsk={onAsk} />}
+				<LinearTuningLane data={store} color={color} />
+				<LoudnessMeter loudness={store?.loudness} color={color} />
+			</div>
 		</>
 	);
 }

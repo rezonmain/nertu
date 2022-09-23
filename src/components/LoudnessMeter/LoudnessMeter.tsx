@@ -20,7 +20,7 @@ const LoudnessMeter = ({
 	const wProp = useSpring({ to: { width: w }, from: { width: prev.current } });
 
 	return (
-		<div className='flex flex-col gap-2 mx-auto max-w-md font-mono'>
+		<div className='flex flex-col gap-2 mx-auto max-w-md font-mono w-full'>
 			<div>
 				<svg
 					viewBox='0 0 280 32'
