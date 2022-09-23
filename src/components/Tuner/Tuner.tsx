@@ -3,25 +3,27 @@ import { useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
 import usePitch, { Pitch, DEFUALT_PITCH } from '../../lib/hooks/usePitch';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
-import CurvedTuningLane from '../CurvedTuningLane/CurvedTuningLane';
+import PermissionModal from '../PermissionModal/PermissionModal';
 import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
 
 export interface TunerData extends Note, Pitch {}
 
 function Tuner() {
 	const { getPitch, getMedia, media } = usePitch();
-	const [store, setStore] = useState<TunerData | undefined>({
-		...TET.DEFAULT_NOTE,
-		...DEFUALT_PITCH,
-	});
+	const [store, setStore] = useState<TunerData | undefined>(undefined);
 
 	const tet = new TET();
 
 	useInterval(() => {
+		if (!media) return;
 		const pitch = getPitch(0.9);
 		const note = tet.frequencyToNote(pitch.frequency);
 		note ? setStore({ ...note, ...pitch }) : setStore(undefined);
 	}, 100);
+
+	const onPermissionClick = () => {
+		getMedia();
+	};
 
 	const color = `hsl(${
 		store ? -Math.abs(store!.cents * 3) + 142 : 142
@@ -29,14 +31,8 @@ function Tuner() {
 
 	return (
 		<>
-			{media ? (
-				<>
-					<LinearTuningLane data={store} color={color} />
-				</>
-			) : (
-				<button onClick={() => getMedia()}>Click to use microphone</button>
-			)}
-
+			{!media && <PermissionModal onPermissionClick={onPermissionClick} />}
+			<LinearTuningLane data={store} color={color} />
 			<LoudnessMeter loudness={store?.loudness} color={color} />
 		</>
 	);

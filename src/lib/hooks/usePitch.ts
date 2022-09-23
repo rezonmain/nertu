@@ -81,7 +81,6 @@ const usePitch = (existingAudioContext?: AudioContext) => {
 	};
 
 	useEffect(() => {
-		getMedia();
 		navigator.mediaDevices.addEventListener('devicechange', getMedia);
 		return () =>
 			navigator.mediaDevices.removeEventListener('devicechange', getMedia);

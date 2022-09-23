@@ -11,16 +11,13 @@ const LoudnessMeter = ({
 	color: string;
 	range?: { min: number; max: number };
 }) => {
-	const prev = useRef(0);
-
+	const prev = useRef(range.min);
 	loudness = loudness ?? range.min;
 
 	let w = (263 / Math.abs(range.max - range.min)) * loudness + 263;
 	w = constrain(0, 263, w);
 
 	const wProp = useSpring({ to: { width: w }, from: { width: prev.current } });
-
-	prev.current = w;
 
 	return (
 		<div className='flex flex-col gap-4 mx-auto max-w-md'>
