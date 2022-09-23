@@ -21,7 +21,7 @@ const NoteIndicator = ({
 		<animated.div
 			id='note-indicator'
 			style={noteIndicatorProps}
-			className={`h-[100px] self-center ${
+			className={`h-[140px] self-center ${
 				as === 'curved' ? '-translate-y-10' : ''
 			}`}
 		>
