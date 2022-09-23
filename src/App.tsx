@@ -7,9 +7,7 @@ import WidgetCarousel from './components/WidgetCarousel/WidgetCarousel';
 function App() {
 	return (
 		<Layout>
-			<>
-				<Tuner />
-			</>
+			<Tuner />
 		</Layout>
 	);
 }

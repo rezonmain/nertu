@@ -24,7 +24,7 @@ const LinearTuningLane = ({
 		>
 			<div
 				id='freq-indicator'
-				className='text-center text-stone-500 text-2xl mb-4'
+				className='text-center text-stone-500 text-2xl mb-4 z-10'
 			>
 				{data ? <p>{data.frequency.toFixed(2)} hz</p> : <p>- hz</p>}
 			</div>

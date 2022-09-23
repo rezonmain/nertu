@@ -9,6 +9,7 @@
 	-webkit-text-size-adjust: 100%;
 	box-sizing: border-box;
 	-webkit-tap-highlight-color: transparent;
+	color-scheme: dark;
 }
 
 @tailwind base;

@@ -27,7 +27,7 @@ function Tuner() {
 
 	const color = `hsl(${
 		store ? -Math.abs(store!.cents * 3) + 142 : 142
-	}, 69%, 58%)`;
+	}, 58%, 69%)`;
 
 	return (
 		<>
