@@ -17,16 +17,10 @@ const LinearTuningLane = ({
 		from: { left: '0%' },
 	});
 
-	const noteIndicatorProps = useSpring({
-		to: {
-			opacity: data ? 1 : 0,
-		},
-	});
-
 	return (
 		<div
 			id='tuner-container'
-			className='h-1/2 w-full mx-auto flex flex-col justify-center gap-10'
+			className='mx-auto max-w-md flex flex-col justify-center gap-10'
 		>
 			<div
 				id='freq-indicator'
