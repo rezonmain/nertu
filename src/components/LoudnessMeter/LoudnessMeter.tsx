@@ -11,7 +11,7 @@ const LoudnessMeter = ({
 	color: string;
 	range?: { min: number; max: number };
 }) => {
-	const prev = useRef(range.min);
+	const prev = useRef(0);
 	loudness = loudness ?? range.min;
 
 	let w = (263 / Math.abs(range.max - range.min)) * loudness + 263;
