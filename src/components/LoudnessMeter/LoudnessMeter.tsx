@@ -40,7 +40,7 @@ const LoudnessMeter = ({
 					/>
 				</svg>
 			</div>
-			<div className='flex flex-row justify-between text-neutral-500'>
+			<div className='flex flex-row justify-between text-neutral-400'>
 				<span>{range.min}dB</span>
 				<span>{range.max}dB</span>
 			</div>

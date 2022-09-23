@@ -11,6 +11,7 @@
 	"dependencies": {
 		"@react-spring/web": "^9.5.4",
 		"@use-gesture/react": "^10.2.20",
+		"framer-motion": "^7.3.6",
 		"pitchy": "^4.0.7",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
