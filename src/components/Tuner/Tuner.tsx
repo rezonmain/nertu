@@ -1,7 +1,7 @@
 import { useInterval } from 'react-use';
 import { useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
-import usePitch, { Pitch, DEFUALT_PITCH } from '../../lib/hooks/usePitch';
+import usePitch, { Pitch } from '../../lib/hooks/usePitch';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
 import PermissionModal from '../PermissionModal/PermissionModal';
 import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
@@ -21,7 +21,7 @@ function Tuner() {
 		note ? setStore({ ...note, ...pitch }) : setStore(undefined);
 	}, 100);
 
-	const onPermissionClick = () => {
+	const onAsk = () => {
 		getMedia();
 	};
 
@@ -31,7 +31,7 @@ function Tuner() {
 
 	return (
 		<>
-			{!media && <PermissionModal onPermissionClick={onPermissionClick} />}
+			{!media && <PermissionModal onAsk={onAsk} />}
 			<LinearTuningLane data={store} color={color} />
 			<LoudnessMeter loudness={store?.loudness} color={color} />
 		</>

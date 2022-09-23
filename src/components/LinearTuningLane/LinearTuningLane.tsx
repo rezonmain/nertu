@@ -20,7 +20,7 @@ const LinearTuningLane = ({
 	return (
 		<div
 			id='tuner-container'
-			className='mx-auto max-w-md flex flex-col justify-center gap-10'
+			className='mx-auto max-w-md flex flex-col justify-center gap-10 font-mono'
 		>
 			<div
 				id='freq-indicator'

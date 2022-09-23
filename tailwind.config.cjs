@@ -5,6 +5,15 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				music: ["'Noto Music'", 'sans-serif'],
+				mono: ["'Roboto Mono'", 'Monaco', 'monospace'],
+				sans: [
+					'Poppins',
+					'ui-sans-serif',
+					'system-ui',
+					'-apple-system',
+					'BlinkMacSystemFont',
+					'sans-serif',
+				],
 			},
 		},
 	},

@@ -20,15 +20,15 @@ const LoudnessMeter = ({
 	const wProp = useSpring({ to: { width: w }, from: { width: prev.current } });
 
 	return (
-		<div className='flex flex-col gap-4 mx-auto max-w-md'>
+		<div className='flex flex-col gap-2 mx-auto max-w-md font-mono'>
 			<div>
 				<svg
-					viewBox='0 0 263 32'
+					viewBox='0 0 280 32'
 					xmlns='http://www.w3.org/2000/svg'
 					fill='none'
 					stroke='#d6d3d1'
 				>
-					<polygon points='0,32 263,0 263,32' id='shell' />
+					<polygon points='0,32 280,0 280,32' id='shell' />
 					<clipPath id='shell-clip'>
 						<animated.rect x='0' y='0' {...wProp} height='32' />
 					</clipPath>
