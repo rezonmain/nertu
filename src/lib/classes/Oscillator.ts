@@ -35,6 +35,7 @@ class Oscillator {
 			noteName,
 			octave,
 			cents,
+			ref: this.tet.A,
 		});
 		this.oscillator.type = shape;
 	}

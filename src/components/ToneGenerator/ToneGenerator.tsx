@@ -21,6 +21,7 @@ const ToneGenerator = () => {
 				noteName: formData.noteName as NoteName,
 				octave: formData.octave,
 				cents: formData.cents,
+				ref: 440,
 			});
 			osc.shape = formData.shape as OscillatorType;
 			osc.start();
@@ -58,6 +59,7 @@ const ToneGenerator = () => {
 				noteName: formData.noteName as NoteName,
 				octave: formData.octave,
 				cents: formData.cents,
+				ref: 440,
 			})} hz`}</p>
 			<label>
 				Note:{' '}
