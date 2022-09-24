@@ -30,17 +30,17 @@ export class TunerSettings {
 
 export enum Transpositions {
 	'C→C' = 0,
-	'C→C#' = 1,
-	'C→D' = 2,
-	'C→Eb' = 3,
-	'C→E' = 4,
-	'C→F' = 5,
-	'C→F#' = 6,
-	'C→G' = 7,
-	'C→Ab' = 8,
-	'C→A' = 9,
-	'C→Bb' = 10,
-	'C→B' = 11,
+	'C♯→C' = 1,
+	'D→C' = 2,
+	'E♭→C' = 3,
+	'E→C' = 4,
+	'F→C' = 5,
+	'F♯→C' = 6,
+	'G→C' = 7,
+	'A♭→C' = 8,
+	'A→C' = 9,
+	'B♭→C' = 10,
+	'B→C' = 11,
 }
 
 export enum NoteSystems {

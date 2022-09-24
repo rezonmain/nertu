@@ -7,17 +7,14 @@ import PermissionModal from '../PermissionModal/PermissionModal';
 import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
 import Header from '../Header/Header';
 import Settings from '../Settings/Settings';
-import {
-	SettingsContext,
-	useSettings,
-} from '../../lib/context/settingsContext';
-import settingsReducer from '../../lib/settingsReducer';
+import ToneGenerator from '../ToneGenerator/ToneGenerator';
+import { TunerSettings } from '../../lib/classes/TunerSettings';
+import { useSettings } from '../../lib/context/settingsContext';
 
 export interface TunerData extends Note, Pitch {}
 
 function Tuner() {
 	const { settings } = useSettings();
-	const [init, dispatch] = useReducer(settingsReducer, settings);
 	const { getPitch, getMedia, media } = usePitch();
 	const [store, setStore] = useState<TunerData | undefined>(undefined);
 	const [settingsToggle, setSettingsToggle] = useState(false);
@@ -32,7 +29,7 @@ function Tuner() {
 		() => {
 			if (!media) return;
 			const pitch = getPitch(0.9);
-			const note = tet.frequencyToNote(pitch.frequency);
+			const note = tet.frequencyToNote(pitch.frequency, settings.transposition);
 			note ? setStore({ ...note, ...pitch }) : setStore(undefined);
 		},
 		settingsToggle ? null : 100
@@ -43,14 +40,13 @@ function Tuner() {
 			<PermissionModal visible={!media} onAsk={() => getMedia()} />
 			<Header onSettings={() => setSettingsToggle((prev) => !prev)} />
 			<div className='px-10 my-auto h-screen flex flex-col justify-center'>
-				<SettingsContext.Provider value={{ settings: init, dispatch }}>
-					<Settings
-						visible={settingsToggle}
-						onSettings={() => setSettingsToggle((prev) => !prev)}
-					/>
-					<LinearTuningLane data={store} color={color} />
-					<LoudnessMeter loudness={store?.loudness} color={color} />
-				</SettingsContext.Provider>
+				<Settings
+					visible={settingsToggle}
+					onSettings={() => setSettingsToggle((prev) => !prev)}
+				/>
+				<ToneGenerator />
+				<LinearTuningLane data={store} color={color} />
+				<LoudnessMeter loudness={store?.loudness} color={color} />
 			</div>
 		</>
 	);

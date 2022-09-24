@@ -33,7 +33,7 @@ const LinearTuningLane = ({
 			</div>
 			<div
 				id='alt-settings-indicators'
-				className='flex flex-row justify-between font-music text-stone-500'
+				className='flex flex-row justify-between font-music text-stone-500 text-lg'
 			>
 				{settings.A !== TunerSettings.DEF.A ? (
 					<span>

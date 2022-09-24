@@ -75,11 +75,13 @@ class TET {
 	 * @param frequency input frequency in hz.
 	 * @returns `note` object for given fequency.
 	 */
-	frequencyToNote(frequency: number): Note | undefined {
+	frequencyToNote(frequency: number, transposition = 0): Note | undefined {
 		if (frequency >= this.min && frequency <= this.max) {
 			const number = Math.round(this.log2((frequency / this.C0) ** 12));
-			const octave = Math.floor(number / 12);
-			const noteName = NoteMap[number - octave * 12] as NoteName;
+			const octave = Math.floor((number - transposition) / 12);
+			const noteName = NoteMap[
+				(number - octave * 12 + (12 - transposition)) % 12
+			] as NoteName;
 			const cents = Math.round(
 				this.log2((frequency / (this.C0 * 2 ** (number / 12))) ** 1200)
 			);

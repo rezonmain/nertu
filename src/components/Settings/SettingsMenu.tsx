@@ -12,7 +12,7 @@ const SettingMenu = () => {
  * ---setting--- --- defualt--- ---desc--- ---values example---
  * - A4 pitch reference:, 440h, frequency for A4, [432, 445...]
  * - show enharmonic notes:, (true), show enharmonic note names while tuning, false
- * - transposition:, c->c (none), (c->Bb, C->Eb)
+ * - transposition:, c->c (none), (c->Bb, C->Eb), C in your instrument sounds like concert Eb
  * - note names:, C-B, select which system to use for note names, Do-Si
  * - faq
  * - about
