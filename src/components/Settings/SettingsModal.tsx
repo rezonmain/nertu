@@ -28,7 +28,7 @@ const SettingsModal = ({
 						transition={{
 							type: 'keyframes',
 						}}
-						className='w-full h-screen absolute top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-[0.5px] border-stone-600'
+						className='w-full min-h-screen absolute top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-[0.5px] border-stone-600'
 					>
 						<div id='modal-content' className='px-7'>
 							<div
@@ -38,7 +38,7 @@ const SettingsModal = ({
 								<IoMdClose size={30} className='translate-y-[3px]' />
 								<h2 className='text-2xl'>settings</h2>
 							</div>
-							<div className=''>{children}</div>
+							<div>{children}</div>
 						</div>
 					</motion.div>
 				</>
