@@ -17,7 +17,7 @@ export interface TunerData extends Note, Pitch {}
 
 function Tuner() {
 	const { settings } = useSettings();
-	const [initialSettings, dispatch] = useReducer(settingsReducer, settings);
+	const [init, dispatch] = useReducer(settingsReducer, settings);
 	const { getPitch, getMedia, media } = usePitch();
 	const [store, setStore] = useState<TunerData | undefined>(undefined);
 	const [settingsToggle, setSettingsToggle] = useState(false);
@@ -38,8 +38,6 @@ function Tuner() {
 		settingsToggle ? null : 100
 	);
 
-	console.log(initialSettings);
-
 	return (
 		<>
 			<Header onSettings={() => setSettingsToggle((prev) => !prev)} />
@@ -52,9 +50,7 @@ function Tuner() {
 					visible={settingsToggle}
 					onSettings={() => setSettingsToggle((prev) => !prev)}
 				/>
-				<SettingsContext.Provider
-					value={{ settings: initialSettings, dispatch }}
-				>
+				<SettingsContext.Provider value={{ settings: init, dispatch }}>
 					<LinearTuningLane data={store} color={color} />
 					<LoudnessMeter loudness={store?.loudness} color={color} />
 				</SettingsContext.Provider>
