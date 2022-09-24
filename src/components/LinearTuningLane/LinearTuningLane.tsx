@@ -2,7 +2,7 @@ import { TunerData } from '../Tuner/Tuner';
 import { animated, useSpring } from '@react-spring/web';
 import NoteIndicator from '../NoteIndicator/NoteIndicator';
 import { useSettings } from '../../lib/context/settingsContext';
-import { Transpositions } from '../../lib/classes/TunerSettings';
+import { Transpositions, TunerSettings } from '../../lib/classes/TunerSettings';
 
 const LinearTuningLane = ({
 	data,
@@ -31,9 +31,18 @@ const LinearTuningLane = ({
 			>
 				{data ? <p>{data.frequency.toFixed(2)} hz</p> : <p>- hz</p>}
 			</div>
-			<div className='flex flex-row justify-between font-music text-stone-500'>
-				{settings.A !== 440 ? <span>A = {settings.A}</span> : <span></span>}
-				{settings.transposition !== 0 ? (
+			<div
+				id='alt-settings-indicators'
+				className='flex flex-row justify-between font-music text-stone-500'
+			>
+				{settings.A !== TunerSettings.DEF.A ? (
+					<span>
+						A<sub>4</sub> = {settings.A}
+					</span>
+				) : (
+					<span></span>
+				)}
+				{settings.transposition !== TunerSettings.DEF.transposition ? (
 					<span>{Transpositions[settings.transposition]}</span>
 				) : (
 					<span></span>
@@ -46,7 +55,7 @@ const LinearTuningLane = ({
 				<animated.span
 					id='cents-indicator'
 					style={tunerIndicatorProps}
-					className='inline-block absolute mb-16 -translate-x-1/2 text-center text-stone-400'
+					className='inline-block absolute mt-16 -translate-x-1/2 text-center text-stone-400'
 				>
 					{data && (data.cents > 0 ? `+${data.cents}c` : `${data.cents}c`)}
 				</animated.span>

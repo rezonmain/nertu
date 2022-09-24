@@ -6,10 +6,10 @@ export class TunerSettings {
 
 	// Default values:
 	constructor(
-		A = 440,
-		showEnharmonic = true,
-		transposition = 0,
-		noteNameSystems = 0
+		A = TunerSettings.DEF.A,
+		showEnharmonic = TunerSettings.DEF.showEnharmonic,
+		transposition = TunerSettings.DEF.transposition,
+		noteNameSystems = TunerSettings.DEF.noteNameSystems
 	) {
 		this.A = A;
 		this.showEnharmonic = showEnharmonic;
@@ -19,21 +19,28 @@ export class TunerSettings {
 			...this,
 		};
 	}
+
+	static DEF = {
+		A: 440,
+		showEnharmonic: true,
+		transposition: 0,
+		noteNameSystems: 0,
+	};
 }
 
 export enum Transpositions {
-	'C->C' = 0,
-	'C-C#' = 1,
-	'C->D' = 2,
-	'C->Eb' = 3,
-	'C->E' = 4,
-	'C->F' = 5,
-	'C->F#' = 6,
-	'C->G' = 7,
-	'C->Ab' = 8,
-	'C->A' = 9,
-	'C-Bb' = 10,
-	'C-B' = 11,
+	'C→C' = 0,
+	'C→C#' = 1,
+	'C→D' = 2,
+	'C→Eb' = 3,
+	'C→E' = 4,
+	'C→F' = 5,
+	'C→F#' = 6,
+	'C→G' = 7,
+	'C→Ab' = 8,
+	'C→A' = 9,
+	'C→Bb' = 10,
+	'C→B' = 11,
 }
 
 export enum NoteSystems {
