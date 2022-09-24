@@ -40,17 +40,14 @@ function Tuner() {
 
 	return (
 		<>
+			<PermissionModal visible={!media} onAsk={() => getMedia()} />
 			<Header onSettings={() => setSettingsToggle((prev) => !prev)} />
-			<div
-				id='content'
-				className='px-10 my-auto h-screen flex flex-col justify-center'
-			>
-				<PermissionModal visible={!media} onAsk={() => getMedia()} />
-				<Settings
-					visible={settingsToggle}
-					onSettings={() => setSettingsToggle((prev) => !prev)}
-				/>
+			<div className='px-10 my-auto h-screen flex flex-col justify-center'>
 				<SettingsContext.Provider value={{ settings: init, dispatch }}>
+					<Settings
+						visible={settingsToggle}
+						onSettings={() => setSettingsToggle((prev) => !prev)}
+					/>
 					<LinearTuningLane data={store} color={color} />
 					<LoudnessMeter loudness={store?.loudness} color={color} />
 				</SettingsContext.Provider>

@@ -10,7 +10,6 @@ export type SettingsContext = {
 // look for saved settings and used them if found
 export const SettingsContext = createContext<SettingsContext>({
 	settings: (() => {
-		console.log(localStorage);
 		const saved = localStorage.getItem('settings');
 		return saved ? (JSON.parse(saved) as TunerSettings) : new TunerSettings();
 	})(),

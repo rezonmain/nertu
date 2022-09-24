@@ -1,6 +1,8 @@
 import { TunerData } from '../Tuner/Tuner';
 import { animated, useSpring } from '@react-spring/web';
 import NoteIndicator from '../NoteIndicator/NoteIndicator';
+import { useSettings } from '../../lib/context/settingsContext';
+import { Transpositions } from '../../lib/classes/TunerSettings';
 
 const LinearTuningLane = ({
 	data,
@@ -9,6 +11,7 @@ const LinearTuningLane = ({
 	data: TunerData | undefined;
 	color: string;
 }) => {
+	const { settings } = useSettings();
 	const tunerIndicatorProps = useSpring({
 		to: {
 			left: data ? `${data.cents + 50}%` : '50%',
@@ -20,17 +23,25 @@ const LinearTuningLane = ({
 	return (
 		<div
 			id='tuner-container'
-			className='mx-auto w-full max-w-md flex flex-col justify-center gap-10 font-mono'
+			className='mx-auto w-full max-w-md flex flex-col justify-center font-mono'
 		>
 			<div
 				id='freq-indicator'
-				className='text-center text-stone-500 text-2xl mb-4'
+				className='text-center text-stone-500 text-2xl mb-10'
 			>
 				{data ? <p>{data.frequency.toFixed(2)} hz</p> : <p>- hz</p>}
 			</div>
+			<div className='flex flex-row justify-between font-music text-stone-500'>
+				{settings.A !== 440 ? <span>A = {settings.A}</span> : <span></span>}
+				{settings.transposition !== 0 ? (
+					<span>{Transpositions[settings.transposition]}</span>
+				) : (
+					<span></span>
+				)}
+			</div>
 			<div
 				id='lane-container'
-				className='flex flex-row justify-between items-center relative'
+				className='flex flex-row justify-between items-center relative mb-10'
 			>
 				<animated.span
 					id='cents-indicator'
@@ -39,6 +50,7 @@ const LinearTuningLane = ({
 				>
 					{data && (data.cents > 0 ? `+${data.cents}c` : `${data.cents}c`)}
 				</animated.span>
+
 				<div className='border border-stone-300 w-full h-0'></div>
 				<div className='outline outline-stone-300 h-7 aspect-square rounded-full'></div>
 				<div className='border border-stone-300 w-full h-0'></div>
