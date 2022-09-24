@@ -1,11 +1,14 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { IoMdClose } from 'react-icons/io';
-const SettingsMenu = ({
+
+const SettingsModal = ({
 	visible,
 	onSettings,
+	children,
 }: {
 	visible: boolean;
 	onSettings: () => void;
+	children: JSX.Element;
 }) => {
 	return (
 		<AnimatePresence>
@@ -13,9 +16,9 @@ const SettingsMenu = ({
 				<>
 					<motion.div
 						initial={{ opacity: 0 }}
-						animate={{ opacity: 0.75 }}
+						animate={{ opacity: 0.65 }}
 						exit={{ opacity: 0 }}
-						className='fixed top-0 left-0 w-full h-screen md:bg-black z-20'
+						className='fixed top-0 left-0 w-full h-screen sm:bg-black z-20'
 						onClick={onSettings}
 					></motion.div>
 					<motion.div
@@ -25,10 +28,16 @@ const SettingsMenu = ({
 						transition={{
 							type: 'keyframes',
 						}}
-						className='w-full h-full fixed top-0 left-0 max-w-3xl md:mx-auto bg-black z-30'
+						className='w-full h-full fixed top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-x-[0.5px] border-stone-600'
 					>
-						<div className='cursor-pointer w-fit h-fit' onClick={onSettings}>
-							<IoMdClose size={30} />
+						<div id='modal-content' className='p-5'>
+							<div
+								className='cursor-pointer w-fit h-fit p-2'
+								onClick={onSettings}
+							>
+								<IoMdClose size={38} />
+							</div>
+							{children}
 						</div>
 					</motion.div>
 				</>
@@ -37,4 +46,4 @@ const SettingsMenu = ({
 	);
 };
 
-export default SettingsMenu;
+export default SettingsModal;

@@ -6,8 +6,7 @@ import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
 import PermissionModal from '../PermissionModal/PermissionModal';
 import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
 import Header from '../Header/Header';
-import SettingsMenu from '../SettingsMenu/SettingsMenu';
-import { AnimatePresence } from 'framer-motion';
+import Settings from '../Settings/Settings';
 
 export interface TunerData extends Note, Pitch {}
 
@@ -40,7 +39,7 @@ function Tuner() {
 				className='px-10 my-auto h-screen flex flex-col justify-center'
 			>
 				<PermissionModal visible={!media} onAsk={() => getMedia()} />
-				<SettingsMenu
+				<Settings
 					visible={settings}
 					onSettings={() => setSettings((prev) => !prev)}
 				/>
