@@ -1,11 +1,5 @@
 const SettingMenu = () => {
-	return (
-		<>
-			{Array.from({ length: 100 }, (v, i) => (
-				<p key={i}>hello</p>
-			))}
-		</>
-	);
+	return <div>hello</div>;
 };
 
 export default SettingMenu;

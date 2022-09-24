@@ -28,7 +28,7 @@ const SettingsModal = ({
 						transition={{
 							type: 'keyframes',
 						}}
-						className='w-full absolute top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-[0.5px] border-stone-600'
+						className='w-full h-screen absolute top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-[0.5px] border-stone-600'
 					>
 						<div id='modal-content' className='px-7'>
 							<div
