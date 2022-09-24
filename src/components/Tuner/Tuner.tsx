@@ -1,5 +1,5 @@
 import { useInterval } from 'react-use';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
 import usePitch, { Pitch } from '../../lib/hooks/usePitch';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
@@ -7,19 +7,26 @@ import PermissionModal from '../PermissionModal/PermissionModal';
 import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
 import Header from '../Header/Header';
 import Settings from '../Settings/Settings';
+import {
+	SettingsContext,
+	useSettings,
+} from '../../lib/context/settingsContext';
+import settingsReducer from '../../lib/settingsReducer';
 
 export interface TunerData extends Note, Pitch {}
 
 function Tuner() {
+	const { settings } = useSettings();
+	const [initialSettings, dispatch] = useReducer(settingsReducer, settings);
 	const { getPitch, getMedia, media } = usePitch();
 	const [store, setStore] = useState<TunerData | undefined>(undefined);
-	const [settings, setSettings] = useState(false);
+	const [settingsToggle, setSettingsToggle] = useState(false);
 
 	const color = `hsl(${
 		store ? -Math.abs(store!.cents * 3) + 142 : 142
 	}, 58%, 69%)`;
 
-	const tet = new TET();
+	const tet = new TET(settings.A);
 
 	useInterval(
 		() => {
@@ -28,23 +35,29 @@ function Tuner() {
 			const note = tet.frequencyToNote(pitch.frequency);
 			note ? setStore({ ...note, ...pitch }) : setStore(undefined);
 		},
-		settings ? null : 100
+		settingsToggle ? null : 100
 	);
+
+	console.log(initialSettings);
 
 	return (
 		<>
-			<Header onSettings={() => setSettings((prev) => !prev)} />
+			<Header onSettings={() => setSettingsToggle((prev) => !prev)} />
 			<div
 				id='content'
 				className='px-10 my-auto h-screen flex flex-col justify-center'
 			>
 				<PermissionModal visible={!media} onAsk={() => getMedia()} />
 				<Settings
-					visible={settings}
-					onSettings={() => setSettings((prev) => !prev)}
+					visible={settingsToggle}
+					onSettings={() => setSettingsToggle((prev) => !prev)}
 				/>
-				<LinearTuningLane data={store} color={color} />
-				<LoudnessMeter loudness={store?.loudness} color={color} />
+				<SettingsContext.Provider
+					value={{ settings: initialSettings, dispatch }}
+				>
+					<LinearTuningLane data={store} color={color} />
+					<LoudnessMeter loudness={store?.loudness} color={color} />
+				</SettingsContext.Provider>
 			</div>
 		</>
 	);

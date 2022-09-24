@@ -16,7 +16,12 @@ class TET {
 		// Use C0 to calculate note frequencies
 		this.C0 = this.A * 2 ** (-57 / 12);
 		this.min = this.C0;
-		this.max = this.toFrequency({ noteName: 'B', octave: 8, cents: 0 });
+		this.max = this.toFrequency({
+			noteName: 'B',
+			octave: 8,
+			cents: 0,
+			ref: this.A,
+		});
 	}
 	/**
 	 * Get the semitone number of a given pitch e.g.
@@ -82,6 +87,7 @@ class TET {
 				noteName,
 				octave,
 				cents,
+				ref: this.A,
 			};
 		}
 	}
@@ -93,12 +99,6 @@ class TET {
 	private log2(x: number) {
 		return Math.log(x) / Math.log(2);
 	}
-
-	static DEFAULT_NOTE: Note = {
-		noteName: 'C',
-		octave: 0,
-		cents: 0,
-	};
 }
 
 enum NoteMap {
@@ -137,6 +137,7 @@ export interface Note {
 	noteName: NoteName;
 	octave: number;
 	cents: number;
+	ref: number;
 }
 
 export default TET;
