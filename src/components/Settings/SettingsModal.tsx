@@ -28,16 +28,16 @@ const SettingsModal = ({
 						transition={{
 							type: 'keyframes',
 						}}
-						className='w-full h-full fixed top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-x-[0.5px] border-stone-600'
+						className='w-full absolute top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-[0.5px] border-stone-600'
 					>
-						<div id='modal-content' className='p-5'>
+						<div id='modal-content' className='p-7'>
 							<div
-								className='cursor-pointer w-fit h-fit p-2'
+								className='top-7 sticky cursor-pointer w-fit h-fit mb-5'
 								onClick={onSettings}
 							>
 								<IoMdClose size={38} />
 							</div>
-							{children}
+							<div className=''>{children}</div>
 						</div>
 					</motion.div>
 				</>
