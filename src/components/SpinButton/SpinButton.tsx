@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { BiPlus, BiMinus } from 'react-icons/bi';
 
 const SpinButton = ({
@@ -36,7 +35,7 @@ const SpinButton = ({
 				<div
 					id='plus-icon'
 					onClick={(e) => handleClick(e, 1)}
-					className='text-fuchsia-500 flex items-center justify-center active:scale-110 transition-transform w-14'
+					className='text-fuchsia-500 flex items-center justify-end active:scale-110 transition-transform w-10'
 				>
 					<BiPlus size={25} />
 				</div>
