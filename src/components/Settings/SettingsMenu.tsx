@@ -100,7 +100,9 @@ const TranspositionControl = () => {
 	const tet = new TET();
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { checked, value } = e.target;
-		checked && dispatch({ type: 'changeTransposition', payload: value });
+		console.log(value);
+		checked &&
+			dispatch({ type: 'changeTransposition', payload: parseInt(value) });
 	};
 	return (
 		<form className='flex flex-col justify-center flex-wrap max-h-[300px] gap-6'>
@@ -111,7 +113,7 @@ const TranspositionControl = () => {
 						name='transposition'
 						value={index}
 						className='w-5'
-						checked={index == settings.transposition}
+						checked={index === settings.transposition}
 						onChange={handleChange}
 					/>
 					{Transpositions[index]}
