@@ -13,20 +13,32 @@ const SpinButton = ({
 		onChange(value + op);
 	};
 	return (
-		<div className='flex flex-row justify-center items-center gap-3'>
-			<span className='text-stone-400'>{value} hz</span>
-			<div className='flex flex-row'>
+		<div
+			id='spin-button'
+			role='spinbutton'
+			className='flex flex-row justify-center items-center gap-3'
+		>
+			<span id='value' className='text-stone-400'>
+				{value} hz
+			</span>
+			<div id='spin-button-container' className='flex flex-row'>
 				<div
+					id='minus-icon'
 					onClick={(e) => handleClick(e, -1)}
-					className='px-2 py-0.5 border-2 border-stone-500 text-stone-500 border-r-0 rounded-md rounded-r-none flex justify-center items-center'
+					className='text-stone-100 flex items-center justify-center active:scale-110 transition-transform w-14'
 				>
-					<BiMinus size={20} />
+					<BiMinus size={25} />
 				</div>
 				<div
+					id='divider'
+					className='w-fit border-l py-5 border-stone-600'
+				></div>
+				<div
+					id='plus-icon'
 					onClick={(e) => handleClick(e, 1)}
-					className='px-2 py-0.5 border-2 border-fuchsia-600 text-fuchsia-500 rounded-md rounded-l-none flex justify-center items-center'
+					className='text-fuchsia-500 flex items-center justify-center active:scale-110 transition-transform w-14'
 				>
-					<BiPlus size={20} />
+					<BiPlus size={25} />
 				</div>
 			</div>
 		</div>
