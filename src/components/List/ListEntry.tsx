@@ -13,7 +13,7 @@ const ListEntry = ({
 		<div
 			id='list-entry'
 			onClick={onClick}
-			className='flex px-7 py-3 w-full h-full flex-row justify-between items-center gap-2 select-none'
+			className='flex px-7 py-3 w-full h-full flex-row justify-between items-center gap-4 select-none'
 		>
 			<div id='list-entry-text-container'>
 				<h3 id='list-entry-title' className='font-semibold'>

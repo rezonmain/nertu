@@ -5,6 +5,7 @@ import { useSettings } from '../../lib/context/settingsContext';
 import ControlModal from '../ControlModal/ControlModal';
 import List from '../List/List';
 import ListEntry from '../List/ListEntry';
+import SpinButton from '../SpinButton/SpinButton';
 import Toggle from '../Toggle/Toggle';
 
 const SettingMenu = () => {
@@ -36,14 +37,13 @@ const SettingMenu = () => {
 							Frequency for A<sub>4</sub>
 						</span>
 					}
-					onClick={() =>
-						onMenuItem(
-							'Pitch Reference',
-							<PitchReferenceControl onDone={onDone} />
-						)
-					}
 				>
-					<span className='text-stone-400'>{settings.A}hz</span>
+					<SpinButton
+						value={settings.A}
+						onChange={(value: number) =>
+							dispatch({ type: 'changeReference', payload: value })
+						}
+					/>
 				</ListEntry>
 				<ListEntry
 					onClick={() => dispatch({ type: 'toggleEnharmonic' })}
@@ -113,10 +113,6 @@ const SettingMenu = () => {
 	);
 };
 
-const PitchReferenceControl = ({ onDone }: { onDone: () => void }) => {
-	return <div>Pitch reference</div>;
-};
-
 const TranspositionControl = ({ onDone }: { onDone: () => void }) => {
 	const { settings, dispatch } = useSettings();
 	const tet = new TET();
@@ -134,7 +130,7 @@ const TranspositionControl = ({ onDone }: { onDone: () => void }) => {
 						type='radio'
 						name='transposition'
 						value={index}
-						className='w-5'
+						className='w-4 translate-y-0.5'
 						checked={index === settings.transposition}
 						onChange={handleChange}
 					/>
@@ -163,8 +159,8 @@ const NameSystemControl = ({ onDone }: { onDone: () => void }) => {
 					<input
 						type='radio'
 						name='systems'
+						className='w-4 translate-y-0.5'
 						value={index}
-						className='w-5'
 						checked={index === settings.noteNameSystem}
 						onChange={handleChange}
 					/>
