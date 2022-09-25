@@ -11,6 +11,9 @@ const Toggle = ({
 		to: value
 			? { left: '40%', backgroundColor: '#047857' }
 			: { left: '-10%', backgroundColor: '#f5f5f4' },
+		config: {
+			tension: 450,
+		},
 	});
 
 	const laneProps = useSpring({
@@ -19,6 +22,9 @@ const Toggle = ({
 
 	return (
 		<div
+			id='toggle-switch'
+			role='switch'
+			aria-checked={value}
 			onClick={(e) => {
 				e.stopPropagation();
 				onToggle();
