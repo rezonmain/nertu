@@ -21,7 +21,7 @@ function Tuner() {
 		store ? -Math.abs(store!.cents * 3) + 142 : 142
 	}, 58%, 69%)`;
 
-	const tet = new TET(settings.A);
+	const tet = new TET(settings.A, settings.noteNameSystem);
 
 	useInterval(
 		() => {

@@ -59,10 +59,13 @@ const SettingMenu = () => {
 					title='Transposition'
 					description={
 						<span>
-							Instrument <span className='font-music'>C </span>sounds like
-							concert{' '}
+							Instrument{' '}
 							<span className='font-music'>
-								{NoteMap[settings.transposition]}
+								{NoteMap[0 + settings.noteNameSystem * 12]}{' '}
+							</span>
+							sounds like concert{' '}
+							<span className='font-music'>
+								{NoteMap[settings.transposition + settings.noteNameSystem * 12]}
 							</span>
 						</span>
 					}
@@ -74,7 +77,11 @@ const SettingMenu = () => {
 					}
 				>
 					<span className='text-stone-400 font-music'>
-						{Transpositions[settings.transposition]}
+						{
+							Transpositions[
+								settings.transposition + settings.noteNameSystem * 12
+							]
+						}
 					</span>
 				</ListEntry>
 				<ListEntry
@@ -131,7 +138,7 @@ const TranspositionControl = ({ onDone }: { onDone: () => void }) => {
 						checked={index === settings.transposition}
 						onChange={handleChange}
 					/>
-					{Transpositions[index]}
+					{Transpositions[index + settings.noteNameSystem * 12]}
 				</label>
 			))}
 		</form>

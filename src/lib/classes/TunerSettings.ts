@@ -41,6 +41,18 @@ export enum Transpositions {
 	'A→C' = 9,
 	'B♭→C' = 10,
 	'B→C' = 11,
+	'Do→Do' = 12,
+	'Do♯→Do' = 13,
+	'Re→Do' = 14,
+	'Mi♭→Do' = 15,
+	'Mi→Do' = 16,
+	'Fa→Do' = 17,
+	'Fa♯→Do' = 18,
+	'Sol→Do' = 19,
+	'La♭→Do' = 20,
+	'La→Do' = 21,
+	'Si♭→Do' = 22,
+	'Si→Do' = 23,
 }
 
 export enum NoteSystems {

@@ -5,13 +5,14 @@
 class TET {
 	A: number;
 	C0: number;
+	sys: number;
 	min: number;
 	max: number;
 	/**
 	 *
 	 * @param A Reference pitch for calculations, it defaults to `440hz`
 	 */
-	constructor(A: number = 440) {
+	constructor(A: number = 440, system: number = 0) {
 		this.A = A;
 		// Use C0 to calculate note frequencies
 		this.C0 = this.A * 2 ** (-57 / 12);
@@ -22,6 +23,7 @@ class TET {
 			cents: 0,
 			ref: this.A,
 		});
+		this.sys = system * 12;
 	}
 	/**
 	 * Get the semitone number of a given pitch e.g.
@@ -80,7 +82,7 @@ class TET {
 			const number = Math.round(this.log2((frequency / this.C0) ** 12));
 			const octave = Math.floor((number - transposition) / 12);
 			const noteName = NoteMap[
-				(number - octave * 12 + (12 - transposition)) % 12
+				((number - octave * 12 + (12 - transposition)) % 12) + this.sys
 			] as NoteName;
 			const cents = Math.round(
 				this.log2((frequency / (this.C0 * 2 ** (number / 12))) ** 1200)
@@ -116,6 +118,18 @@ export enum NoteMap {
 	'A' = 9,
 	'B♭' = 10,
 	'B' = 11,
+	'Do' = 12,
+	'Do♯' = 13,
+	'Re' = 14,
+	'Mi♭' = 15,
+	'Mi' = 16,
+	'Fa' = 17,
+	'Fa♯' = 18,
+	'Sol' = 19,
+	'La♭' = 20,
+	'La' = 21,
+	'Si♭' = 22,
+	'Si' = 23,
 }
 
 enum Enharmonic {
@@ -131,6 +145,18 @@ enum Enharmonic {
 	'F♯' = 'G♭',
 	'A♭' = 'G♯',
 	'B♭' = 'A♯',
+	'Do' = '',
+	'Re' = '',
+	'Mi' = '',
+	'Fa' = '',
+	'Sol' = '',
+	'La' = '',
+	'Si' = '',
+	'Do♯' = 'Re♭',
+	'Mi♭' = 'Re♯',
+	'Fa♯' = 'Sol♭',
+	'La♭' = 'Sol♯',
+	'Si♭' = 'La♯',
 }
 
 export type NoteName = keyof typeof NoteMap;
