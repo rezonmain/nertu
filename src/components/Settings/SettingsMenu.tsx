@@ -22,6 +22,10 @@ const SettingMenu = () => {
 	const onMenuItem = (title: string, control: JSX.Element) => {
 		setControlModal({ show: true, title, control });
 	};
+
+	const onDone = () => {
+		setControlModal({ show: false, title: null, control: null });
+	};
 	return (
 		<>
 			<List>
@@ -33,7 +37,10 @@ const SettingMenu = () => {
 						</span>
 					}
 					onClick={() =>
-						onMenuItem('Pitch Reference', <PitchReferenceControl />)
+						onMenuItem(
+							'Pitch Reference',
+							<PitchReferenceControl onDone={onDone} />
+						)
 					}
 				>
 					<span className='text-stone-400'>{settings.A}hz</span>
@@ -59,7 +66,12 @@ const SettingMenu = () => {
 							</span>
 						</span>
 					}
-					onClick={() => onMenuItem('Transposition', <TranspositionControl />)}
+					onClick={() =>
+						onMenuItem(
+							'Transposition',
+							<TranspositionControl onDone={onDone} />
+						)
+					}
 				>
 					<span className='text-stone-400 font-music'>
 						{Transpositions[settings.transposition]}
@@ -68,7 +80,12 @@ const SettingMenu = () => {
 				<ListEntry
 					title='Note names'
 					description='Select which system to use for note names'
-					onClick={() => onMenuItem('Note name system', <NameSystemControl />)}
+					onClick={() =>
+						onMenuItem(
+							'Note name system',
+							<NameSystemControl onDone={onDone} />
+						)
+					}
 				>
 					<span className='text-stone-400'>
 						{NoteSystems[settings.noteNameSystem]}
@@ -81,9 +98,7 @@ const SettingMenu = () => {
 				key='control-modal'
 				visible={controlModal.show}
 				title={controlModal.title}
-				onCancel={() =>
-					setControlModal({ show: false, control: null, title: null })
-				}
+				onCancel={onDone}
 			>
 				{controlModal.control}
 			</ControlModal>
@@ -91,17 +106,18 @@ const SettingMenu = () => {
 	);
 };
 
-const PitchReferenceControl = () => {
+const PitchReferenceControl = ({ onDone }: { onDone: () => void }) => {
 	return <div>Pitch reference</div>;
 };
 
-const TranspositionControl = () => {
+const TranspositionControl = ({ onDone }: { onDone: () => void }) => {
 	const { settings, dispatch } = useSettings();
 	const tet = new TET();
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { checked, value } = e.target;
 		checked &&
 			dispatch({ type: 'changeTransposition', payload: parseInt(value) });
+		onDone();
 	};
 	return (
 		<form className='flex flex-col flex-wrap max-h-[350px] gap-6'>
@@ -122,7 +138,7 @@ const TranspositionControl = () => {
 	);
 };
 
-const NameSystemControl = () => {
+const NameSystemControl = ({ onDone }: { onDone: () => void }) => {
 	const { settings, dispatch } = useSettings();
 	const systems = Object.keys(NoteSystems).filter(
 		(value) => !parseInt(value) && value !== '0'
@@ -130,6 +146,7 @@ const NameSystemControl = () => {
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { checked, value } = e.target;
 		checked && dispatch({ type: 'changeNoteSystem', payload: parseInt(value) });
+		onDone();
 	};
 
 	return (
