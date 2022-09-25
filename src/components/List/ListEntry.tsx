@@ -8,7 +8,7 @@ const ListEntry = ({
 	children?: JSX.Element;
 }) => {
 	return (
-		<div className='flex flex-row justify-between items-center gap-10'>
+		<div className='flex flex-row justify-between items-center gap-2'>
 			<div>
 				<h3 className='font-semibold'>{title}</h3>
 				<p className='text-stone-400 text-sm'>{description}</p>
