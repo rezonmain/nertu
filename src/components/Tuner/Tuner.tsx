@@ -1,5 +1,5 @@
 import { useInterval } from 'react-use';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
 import usePitch, { Pitch } from '../../lib/hooks/usePitch';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
@@ -8,7 +8,6 @@ import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
 import Header from '../Header/Header';
 import Settings from '../Settings/Settings';
 import { useSettings } from '../../lib/context/settingsContext';
-import { useNavigation } from 'react-router-dom';
 import useDisclosure from '../../lib/hooks/useDisclosure';
 
 export interface TunerData extends Note, Pitch {}
