@@ -9,23 +9,35 @@ export interface SettingsAction {
 	payload?: unknown;
 }
 
+const saveSettings = (state: TunerSettings) => {
+	localStorage.setItem('settings', JSON.stringify(state));
+};
+
 const settingsReducer = (
 	state: TunerSettings,
 	action: SettingsAction
 ): TunerSettings => {
 	const { type, payload } = action;
+	let newState: TunerSettings;
 	switch (type) {
 		case 'changeReference':
-			return { ...state, A: payload as number };
+			newState = { ...state, A: payload as number };
+			break;
 		case 'toggleEnharmonic':
-			return { ...state, showEnharmonic: !state.showEnharmonic };
+			newState = { ...state, showEnharmonic: !state.showEnharmonic };
+			break;
 		case 'changeTransposition':
-			return { ...state, transposition: payload as number };
+			newState = { ...state, transposition: payload as number };
+			break;
 		case 'changeNoteSystem':
-			return { ...state, noteNameSystem: payload as number };
+			newState = { ...state, noteNameSystem: payload as number };
+			break;
 		default:
-			return state;
+			newState = state;
+			break;
 	}
+	saveSettings(newState);
+	return newState;
 };
 
 export default settingsReducer;
