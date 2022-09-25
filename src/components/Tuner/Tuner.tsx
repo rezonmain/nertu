@@ -1,5 +1,5 @@
 import { useInterval } from 'react-use';
-import { useReducer, useState } from 'react';
+import { useState } from 'react';
 import TET, { Note } from '../../lib/classes/TET';
 import usePitch, { Pitch } from '../../lib/hooks/usePitch';
 import LoudnessMeter from '../LoudnessMeter/LoudnessMeter';
@@ -7,8 +7,6 @@ import PermissionModal from '../PermissionModal/PermissionModal';
 import LinearTuningLane from '../LinearTuningLane/LinearTuningLane';
 import Header from '../Header/Header';
 import Settings from '../Settings/Settings';
-import ToneGenerator from '../ToneGenerator/ToneGenerator';
-import { TunerSettings } from '../../lib/classes/TunerSettings';
 import { useSettings } from '../../lib/context/settingsContext';
 
 export interface TunerData extends Note, Pitch {}
@@ -44,7 +42,6 @@ function Tuner() {
 					visible={settingsToggle}
 					onSettings={() => setSettingsToggle((prev) => !prev)}
 				/>
-				<ToneGenerator />
 				<LinearTuningLane data={store} color={color} />
 				<LoudnessMeter loudness={store?.loudness} color={color} />
 			</div>

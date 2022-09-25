@@ -30,9 +30,9 @@ const SettingsModal = ({
 						}}
 						className='w-full min-h-screen absolute top-0 left-0 max-w-[640px] sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 bg-black z-30 sm:border-[0.5px] border-stone-600'
 					>
-						<div id='modal-content' className='px-7'>
+						<div id='modal-content'>
 							<div
-								className='top-0 sticky cursor-pointer w-fit h-fit mb-5 flex flex-row bg-black py-5 gap-8'
+								className='top-0 sticky cursor-pointer w-fit h-fit mb-5 flex flex-row bg-black px-7 py-5 gap-8'
 								onClick={onSettings}
 							>
 								<IoMdClose size={30} className='translate-y-[3px]' />

@@ -1,10 +1,18 @@
+import List from '../List/List';
+import ListEntry from '../List/ListEntry';
+
 const SettingMenu = () => {
 	return (
-		<>
-			{Array.from({ length: 100 }, (v, i) => (
-				<p key={i}>hello</p>
-			))}
-		</>
+		<List>
+			<ListEntry
+				title='A4 pitch reference'
+				description='Frequency for A4'
+			></ListEntry>
+			<ListEntry
+				title='Show enharmonic'
+				description='Display enharmonic note names while tuning'
+			></ListEntry>
+		</List>
 	);
 };
 
