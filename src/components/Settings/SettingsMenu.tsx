@@ -69,20 +69,8 @@ const SettingMenu = () => {
 							</span>
 						</span>
 					}
-					onClick={() =>
-						onMenuItem(
-							'Transposition',
-							<TranspositionControl onDone={onDone} />
-						)
-					}
 				>
-					<span className='text-stone-400 font-music'>
-						{
-							Transpositions[
-								settings.transposition + settings.noteNameSystem * 12
-							]
-						}
-					</span>
+					<TranspositionControl />
 				</ListEntry>
 				<ListEntry
 					title='Note names'
@@ -113,31 +101,27 @@ const SettingMenu = () => {
 	);
 };
 
-const TranspositionControl = ({ onDone }: { onDone: () => void }) => {
+const TranspositionControl = () => {
 	const { settings, dispatch } = useSettings();
-	const tet = new TET();
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		const { checked, value } = e.target;
-		checked &&
-			dispatch({ type: 'changeTransposition', payload: parseInt(value) });
-		onDone();
+	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+		const { value } = e.target;
+		dispatch({ type: 'changeTransposition', payload: parseInt(value) });
 	};
 	return (
-		<form className='flex flex-col flex-wrap max-h-[200px] gap-6'>
-			{tet.noteNameIter((note, index) => (
-				<label key={index} className='text-lg font-music flex flex-row gap-3'>
-					<input
-						type='radio'
-						name='transposition'
-						value={index}
-						className='w-4 translate-y-0.5'
-						checked={index === settings.transposition}
-						onChange={handleChange}
-					/>
-					{Transpositions[index + settings.noteNameSystem * 12]}
-				</label>
-			))}
-		</form>
+		<div className='w-full'>
+			<select
+				name='transposition-select'
+				className='font-music bg-inherit text-stone-400 outline-fuchsia-500 p-1'
+				onChange={handleChange}
+				defaultValue={settings.transposition}
+			>
+				{Array.from({ length: 12 }).map((v, i) => (
+					<option key={i} value={i}>
+						{Transpositions[i + settings.noteNameSystem]}
+					</option>
+				))}
+			</select>
+		</div>
 	);
 };
 

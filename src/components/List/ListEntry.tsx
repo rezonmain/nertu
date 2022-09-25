@@ -7,7 +7,7 @@ const ListEntry = ({
 	title: string;
 	description?: string | JSX.Element;
 	children?: JSX.Element;
-	onClick?: () => void;
+	onClick?: (e?: React.MouseEvent<HTMLDivElement>) => void;
 }) => {
 	return (
 		<div
