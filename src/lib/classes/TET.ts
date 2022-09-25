@@ -103,7 +103,7 @@ class TET {
 	}
 }
 
-enum NoteMap {
+export enum NoteMap {
 	'C' = 0,
 	'C♯' = 1,
 	'D' = 2,

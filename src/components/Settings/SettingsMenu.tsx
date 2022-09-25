@@ -1,7 +1,10 @@
+import { NoteMap } from '../../lib/classes/TET';
+import { useSettings } from '../../lib/context/settingsContext';
 import List from '../List/List';
 import ListEntry from '../List/ListEntry';
 
 const SettingMenu = () => {
+	const { settings } = useSettings();
 	return (
 		<List>
 			<ListEntry
@@ -12,6 +15,18 @@ const SettingMenu = () => {
 				title='Show enharmonic'
 				description='Display enharmonic note names while tuning'
 			></ListEntry>
+			<ListEntry
+				title='Transposition'
+				description={`Instrument C sound like concert ${
+					NoteMap[settings.transposition]
+				}`}
+			></ListEntry>
+			<ListEntry
+				title='Note names'
+				description='Select which system to use for note names'
+			></ListEntry>
+			<ListEntry title='FAQ'></ListEntry>
+			<ListEntry title='About'></ListEntry>
 		</List>
 	);
 };

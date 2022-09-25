@@ -3,7 +3,7 @@ const ListEntry = ({
 	description,
 }: {
 	title: string;
-	description: string;
+	description?: string;
 }) => {
 	return (
 		<div className='flex flex-row justify-between items-center'>
