@@ -123,7 +123,7 @@ const TranspositionControl = ({ onDone }: { onDone: () => void }) => {
 		onDone();
 	};
 	return (
-		<form className='flex flex-col flex-wrap max-h-[350px] gap-6'>
+		<form className='flex flex-col flex-wrap max-h-[200px] gap-6'>
 			{tet.noteNameIter((note, index) => (
 				<label key={index} className='text-lg font-music flex flex-row gap-3'>
 					<input
@@ -153,7 +153,7 @@ const NameSystemControl = ({ onDone }: { onDone: () => void }) => {
 	};
 
 	return (
-		<form className='flex flex-col justify-center flex-wrap max-h-[300px] gap-6'>
+		<form className='flex flex-col justify-center flex-wrap gap-6'>
 			{systems.map((val, index) => (
 				<label key={index} className='text-lg font-music flex flex-row gap-3'>
 					<input
