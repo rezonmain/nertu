@@ -18,7 +18,9 @@ const NoteIndicator = ({
 		},
 	});
 
-	const enharmonic = new TET().getEnharmonic(note!);
+	const enharmonic = settings.showEnharmonic
+		? new TET().getEnharmonic(note!)
+		: undefined;
 	return (
 		<animated.div
 			id='note-indicator'
@@ -29,14 +31,14 @@ const NoteIndicator = ({
 		>
 			<div
 				className={`flex flex-col gap-7 -rotate-45 ${
-					enharmonic && settings.showEnharmonic && '-translate-y-3'
+					enharmonic && '-translate-y-3'
 				}`}
 			>
 				<p className='text-5xl block rotate-45 font-music'>
 					{note}
 					<sub className='text-xl'>{octave}</sub>
 				</p>
-				{enharmonic && settings.showEnharmonic && (
+				{enharmonic && (
 					<>
 						<hr className='border-stone-500' />
 						<p className='text-4xl block rotate-45 text-stone-500 translate-x-4 -translate-y-1 font-music'>
