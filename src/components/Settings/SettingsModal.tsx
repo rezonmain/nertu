@@ -15,6 +15,7 @@ const SettingsModal = ({
 			{visible && (
 				<>
 					<motion.div
+						id='settings-modal-background'
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 0.65 }}
 						exit={{ opacity: 0 }}
@@ -22,6 +23,7 @@ const SettingsModal = ({
 						onClick={onSettings}
 					></motion.div>
 					<motion.div
+						id='settings-modal'
 						initial={{ top: '100%' }}
 						animate={{ top: '0%' }}
 						exit={{ top: '100%' }}
@@ -44,7 +46,7 @@ const SettingsModal = ({
 								</div>
 								<h2 className='text-2xl'>Settings</h2>
 							</div>
-							<div>{children}</div>
+							{children}
 						</div>
 					</motion.div>
 				</>

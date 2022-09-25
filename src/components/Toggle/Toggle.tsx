@@ -7,17 +7,24 @@ const Toggle = ({
 	onToggle: () => void;
 	value: boolean;
 }) => {
+	const laneActive = '#d946ef';
+	const laneInactive = '#44403c';
+	const indicatorActive = '#a21caf';
+	const indicatorInactive = '#f5f5f4';
+
 	const indicatorProps = useSpring({
 		to: value
-			? { left: '40%', backgroundColor: '#047857' }
-			: { left: '-10%', backgroundColor: '#f5f5f4' },
+			? { left: '40%', backgroundColor: indicatorActive }
+			: { left: '-10%', backgroundColor: indicatorInactive },
 		config: {
 			tension: 450,
 		},
 	});
 
 	const laneProps = useSpring({
-		to: value ? { backgroundColor: '#10b981' } : { backgroundColor: '#44403c' },
+		to: value
+			? { backgroundColor: laneActive }
+			: { backgroundColor: laneInactive },
 	});
 
 	return (

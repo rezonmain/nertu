@@ -20,9 +20,13 @@ const LoudnessMeter = ({
 	const wProp = useSpring({ to: { width: w }, from: { width: prev.current } });
 
 	return (
-		<div className='flex flex-col gap-2 mx-auto max-w-md font-mono w-full'>
-			<div>
+		<div
+			id='loudenss-indicator'
+			className='flex flex-col gap-2 mx-auto max-w-md font-mono w-full'
+		>
+			<div id='loudness-shell-container'>
 				<svg
+					id='loudness-shell'
 					viewBox='0 0 280 32'
 					xmlns='http://www.w3.org/2000/svg'
 					fill='none'
@@ -40,7 +44,10 @@ const LoudnessMeter = ({
 					/>
 				</svg>
 			</div>
-			<div className='flex flex-row justify-between text-neutral-400'>
+			<div
+				id='markers-container'
+				className='flex flex-row justify-between text-neutral-400'
+			>
 				<span>{range.min}dB</span>
 				<span>{range.max}dB</span>
 			</div>

@@ -1,12 +1,13 @@
 const List = ({ children }: { children: JSX.Element[] }) => {
 	return (
-		<div className='flex flex-col'>
+		<div id='list' className='flex flex-col'>
 			{children.map((element, i) => (
 				<div
+					id='list-child-container'
 					key={i}
 					className='border-y border-neutral-800 flex flex-col justify-center cursor-pointer hover:bg-stone-900 transition-colors'
 				>
-					<div className='px-7 py-3'>{element}</div>
+					{element}
 				</div>
 			))}
 		</div>
