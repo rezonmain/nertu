@@ -5,7 +5,7 @@ const List = ({ children }: { children: JSX.Element[] }) => {
 				<div
 					id='list-child-container'
 					key={i}
-					className='border-y border-neutral-800 flex flex-col justify-center cursor-pointer hover:bg-stone-900 transition-colors'
+					className='border-b border-neutral-800 flex flex-col justify-center cursor-pointer active:bg-stone-900 transition-colors'
 				>
 					{element}
 				</div>

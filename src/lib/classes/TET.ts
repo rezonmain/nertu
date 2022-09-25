@@ -36,7 +36,7 @@ class TET {
 	 * Provides a map function to iterate over every note name
 	 * @param callback Callback function to execute on each note name
 	 */
-	noteNameIter<T>(callback: (note: NoteName, index?: number) => T) {
+	noteNameIter<T>(callback: (note: NoteName, index: number) => T) {
 		const notes = [
 			'C',
 			'C♯',
