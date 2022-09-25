@@ -1,4 +1,5 @@
 import { NoteMap } from '../../lib/classes/TET';
+import { NoteSystems, Transpositions } from '../../lib/classes/TunerSettings';
 import { useSettings } from '../../lib/context/settingsContext';
 import List from '../List/List';
 import ListEntry from '../List/ListEntry';
@@ -7,24 +8,36 @@ const SettingMenu = () => {
 	const { settings } = useSettings();
 	return (
 		<List>
-			<ListEntry
-				title='A4 pitch reference'
-				description='Frequency for A4'
-			></ListEntry>
+			<ListEntry title='Pitch reference' description='Frequency for A4'>
+				<span className='text-lg text-stone-400'>{settings.A}hz</span>
+			</ListEntry>
 			<ListEntry
 				title='Show enharmonic'
 				description='Display enharmonic note names while tuning'
 			></ListEntry>
 			<ListEntry
 				title='Transposition'
-				description={`Instrument C sound like concert ${
-					NoteMap[settings.transposition]
-				}`}
-			></ListEntry>
+				description={
+					<span>
+						Instrument <span className='font-music'>C </span>sounds like concert{' '}
+						<span className='font-music'>
+							{NoteMap[settings.transposition]}
+						</span>
+					</span>
+				}
+			>
+				<span className='text-lg text-stone-400 font-music'>
+					{Transpositions[settings.transposition]}
+				</span>
+			</ListEntry>
 			<ListEntry
 				title='Note names'
 				description='Select which system to use for note names'
-			></ListEntry>
+			>
+				<span className='text-stone-400 font-music'>
+					{NoteSystems[settings.noteNameSystem]}
+				</span>
+			</ListEntry>
 			<ListEntry title='FAQ'></ListEntry>
 			<ListEntry title='About'></ListEntry>
 		</List>
