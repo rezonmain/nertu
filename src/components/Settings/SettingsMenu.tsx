@@ -104,7 +104,7 @@ const TranspositionControl = () => {
 			dispatch({ type: 'changeTransposition', payload: parseInt(value) });
 	};
 	return (
-		<form className='flex flex-col justify-center flex-wrap max-h-[300px] gap-6'>
+		<form className='flex flex-col flex-wrap max-h-[350px] gap-6'>
 			{tet.noteNameIter((note, index) => (
 				<label key={index} className='text-lg font-music flex flex-row gap-3'>
 					<input
@@ -127,7 +127,6 @@ const NameSystemControl = () => {
 	const systems = Object.keys(NoteSystems).filter(
 		(value) => !parseInt(value) && value !== '0'
 	);
-	console.log(systems);
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { checked, value } = e.target;
 		checked && dispatch({ type: 'changeNoteSystem', payload: parseInt(value) });
