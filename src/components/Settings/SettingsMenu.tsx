@@ -100,7 +100,6 @@ const TranspositionControl = () => {
 	const tet = new TET();
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { checked, value } = e.target;
-		console.log(value);
 		checked &&
 			dispatch({ type: 'changeTransposition', payload: parseInt(value) });
 	};
@@ -124,7 +123,33 @@ const TranspositionControl = () => {
 };
 
 const NameSystemControl = () => {
-	return <div>NoteName</div>;
+	const { settings, dispatch } = useSettings();
+	const systems = Object.keys(NoteSystems).filter(
+		(value) => !parseInt(value) && value !== '0'
+	);
+	console.log(systems);
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		const { checked, value } = e.target;
+		checked && dispatch({ type: 'changeNoteSystem', payload: parseInt(value) });
+	};
+
+	return (
+		<form className='flex flex-col justify-center flex-wrap max-h-[300px] gap-6'>
+			{systems.map((val, index) => (
+				<label key={index} className='text-lg font-music flex flex-row gap-3'>
+					<input
+						type='radio'
+						name='systems'
+						value={index}
+						className='w-5'
+						checked={index === settings.noteNameSystem}
+						onChange={handleChange}
+					/>
+					{NoteSystems[index]}
+				</label>
+			))}
+		</form>
+	);
 };
 
 /**

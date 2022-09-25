@@ -37,7 +37,7 @@ const ControlModal = ({
 						className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-fit w-[85vw] max-w-md bg-stone-700 p-4 rounded-md'
 					>
 						<h1 className='text-xl font-semibold'>{title}</h1>
-						<div id='control' className='my-3'>
+						<div id='control' className='my-5'>
 							{children}
 						</div>
 						<div
