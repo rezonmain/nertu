@@ -3,9 +3,10 @@ import { NoteSystems, Transpositions } from '../../lib/classes/TunerSettings';
 import { useSettings } from '../../lib/context/settingsContext';
 import List from '../List/List';
 import ListEntry from '../List/ListEntry';
+import Toggle from '../Toggle/Toggle';
 
 const SettingMenu = () => {
-	const { settings } = useSettings();
+	const { settings, dispatch } = useSettings();
 	return (
 		<List>
 			<ListEntry
@@ -15,13 +16,20 @@ const SettingMenu = () => {
 						Frequency for A<sub>4</sub>
 					</span>
 				}
+				onClick={() => console.log('pitch reference')}
 			>
 				<span className='text-stone-400'>{settings.A}hz</span>
 			</ListEntry>
 			<ListEntry
+				onClick={() => dispatch({ type: 'toggleEnharmonic' })}
 				title='Show enharmonic'
 				description='Display enharmonic note names while tuning'
-			></ListEntry>
+			>
+				<Toggle
+					onToggle={() => dispatch({ type: 'toggleEnharmonic' })}
+					value={settings.showEnharmonic}
+				/>
+			</ListEntry>
 			<ListEntry
 				title='Transposition'
 				description={
