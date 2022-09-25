@@ -16,7 +16,7 @@ const SettingMenu = () => {
 					</span>
 				}
 			>
-				<span className='text-lg text-stone-400'>{settings.A}hz</span>
+				<span className='text-stone-400'>{settings.A}hz</span>
 			</ListEntry>
 			<ListEntry
 				title='Show enharmonic'
@@ -33,7 +33,7 @@ const SettingMenu = () => {
 					</span>
 				}
 			>
-				<span className='text-lg text-stone-400 font-music'>
+				<span className='text-stone-400 font-music'>
 					{Transpositions[settings.transposition]}
 				</span>
 			</ListEntry>
@@ -41,7 +41,7 @@ const SettingMenu = () => {
 				title='Note names'
 				description='Select which system to use for note names'
 			>
-				<span className='text-stone-400 text-lg'>
+				<span className='text-stone-400'>
 					{NoteSystems[settings.noteNameSystem]}
 				</span>
 			</ListEntry>

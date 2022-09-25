@@ -10,8 +10,8 @@ const ListEntry = ({
 	return (
 		<div className='flex flex-row justify-between items-center gap-10'>
 			<div>
-				<h3 className='font-semibold text-lg'>{title}</h3>
-				<p className='text-stone-400'>{description}</p>
+				<h3 className='font-semibold'>{title}</h3>
+				<p className='text-stone-400 text-sm'>{description}</p>
 			</div>
 			<div>{children}</div>
 		</div>
