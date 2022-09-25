@@ -8,7 +8,14 @@ const SettingMenu = () => {
 	const { settings } = useSettings();
 	return (
 		<List>
-			<ListEntry title='Pitch reference' description='Frequency for A4'>
+			<ListEntry
+				title='Pitch reference'
+				description={
+					<span>
+						Frequency for A<sub>4</sub>
+					</span>
+				}
+			>
 				<span className='text-lg text-stone-400'>{settings.A}hz</span>
 			</ListEntry>
 			<ListEntry
@@ -34,7 +41,7 @@ const SettingMenu = () => {
 				title='Note names'
 				description='Select which system to use for note names'
 			>
-				<span className='text-stone-400 font-music'>
+				<span className='text-stone-400 text-lg'>
 					{NoteSystems[settings.noteNameSystem]}
 				</span>
 			</ListEntry>

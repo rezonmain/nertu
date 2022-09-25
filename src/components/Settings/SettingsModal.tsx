@@ -33,16 +33,16 @@ const SettingsModal = ({
 						<div id='modal-content'>
 							<div
 								id='settings-header'
-								className='top-0 sticky w-fit h-fit flex flex-row bg-black px-7 py-5 gap-8'
+								className='top-0 sticky w-fit h-fit flex flex-row bg-black px-7 py-5 gap-5'
 							>
 								<div
 									id='settings-exit'
 									className='w-fit cursor-pointer'
 									onClick={onSettings}
 								>
-									<IoMdClose size={30} className='translate-y-[3px]' />
+									<IoMdClose size={30} className='translate-y-[1px]' />
 								</div>
-								<h2 className='text-2xl'>settings</h2>
+								<h2 className='text-2xl'>Settings</h2>
 							</div>
 							<div>{children}</div>
 						</div>
