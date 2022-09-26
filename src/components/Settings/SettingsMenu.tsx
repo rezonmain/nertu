@@ -69,8 +69,20 @@ const SettingMenu = () => {
 							</span>
 						</span>
 					}
+					onClick={() =>
+						onMenuItem(
+							'Transposition',
+							<TranspositionControl onDone={onDone} />
+						)
+					}
 				>
-					<TranspositionControl />
+					<span className='text-stone-400'>
+						{
+							Transpositions[
+								settings.transposition + settings.noteNameSystem * 12
+							]
+						}
+					</span>
 				</ListEntry>
 				<ListEntry
 					title='Note names'
@@ -101,27 +113,32 @@ const SettingMenu = () => {
 	);
 };
 
-const TranspositionControl = () => {
+const TranspositionControl = ({ onDone }: { onDone: () => void }) => {
 	const { settings, dispatch } = useSettings();
-	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
 		dispatch({ type: 'changeTransposition', payload: parseInt(value) });
+		onDone();
 	};
 	return (
-		<div>
-			<select
-				name='transposition-select'
-				className='font-music bg-inherit selection:outline text-stone-400 outline-fuchsia-500 border-fuchsia-500 rounded-md p-1 w-24'
-				onChange={handleChange}
-				defaultValue={settings.transposition}
-			>
-				{Array.from({ length: 12 }).map((v, i) => (
-					<option key={i} value={i}>
-						{Transpositions[i + settings.noteNameSystem * 12]}
-					</option>
-				))}
-			</select>
-		</div>
+		<form className='flex flex-col justify-center flex-wrap gap-6'>
+			{Array.from({ length: 12 }).map((val, index) => (
+				<label
+					key={index}
+					className='text-lg font-music flex flex-row items-center gap-3'
+				>
+					<input
+						type='radio'
+						name='systems'
+						className='w-3 aspect-square translate-y-0.5 appearance-none rounded-full outline outline-stone-100 checked:bg-fuchsia-500 checked:border-fuchsia-500 checked:outline-fuchsia-500 outline-offset-1'
+						value={index}
+						checked={index === settings.transposition}
+						onChange={handleChange}
+					/>
+					{Transpositions[index + settings.noteNameSystem * 12]}
+				</label>
+			))}
+		</form>
 	);
 };
 

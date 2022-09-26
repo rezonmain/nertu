@@ -35,7 +35,7 @@ const SettingsModal = ({
 						<div id='modal-content'>
 							<div
 								id='settings-header'
-								className='top-0 sticky w-fit h-fit flex flex-row bg-black px-7 py-5 gap-5'
+								className='top-0 sticky w-fit h-fit flex flex-row bg-black px-7 py-5 gap-5 select-none'
 							>
 								<div
 									id='settings-exit'
