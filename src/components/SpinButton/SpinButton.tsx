@@ -24,7 +24,7 @@ const SpinButton = ({
 				<div
 					id='minus-icon'
 					onClick={(e) => handleClick(e, -1)}
-					className='text-stone-100 flex items-center justify-center active:scale-110 transition-transform w-14'
+					className='text-stone-400 flex items-center justify-center active:scale-110 transition-transform w-14'
 				>
 					<BiMinus size={25} />
 				</div>

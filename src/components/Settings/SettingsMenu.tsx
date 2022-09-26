@@ -108,16 +108,16 @@ const TranspositionControl = () => {
 		dispatch({ type: 'changeTransposition', payload: parseInt(value) });
 	};
 	return (
-		<div className='w-full'>
+		<div>
 			<select
 				name='transposition-select'
-				className='font-music bg-inherit text-stone-400 outline-fuchsia-500 p-1'
+				className='font-music bg-inherit selection:outline text-stone-400 outline-fuchsia-500 border-fuchsia-500 rounded-md p-1 w-24'
 				onChange={handleChange}
 				defaultValue={settings.transposition}
 			>
 				{Array.from({ length: 12 }).map((v, i) => (
 					<option key={i} value={i}>
-						{Transpositions[i + settings.noteNameSystem]}
+						{Transpositions[i + settings.noteNameSystem * 12]}
 					</option>
 				))}
 			</select>
@@ -139,11 +139,14 @@ const NameSystemControl = ({ onDone }: { onDone: () => void }) => {
 	return (
 		<form className='flex flex-col justify-center flex-wrap gap-6'>
 			{systems.map((val, index) => (
-				<label key={index} className='text-lg font-music flex flex-row gap-3'>
+				<label
+					key={index}
+					className='text-lg font-music flex flex-row items-center gap-3'
+				>
 					<input
 						type='radio'
 						name='systems'
-						className='w-4 translate-y-0.5'
+						className='w-3 aspect-square translate-y-0.5 appearance-none rounded-full outline outline-stone-100 checked:bg-fuchsia-500 checked:border-fuchsia-500 checked:outline-fuchsia-500 outline-offset-1'
 						value={index}
 						checked={index === settings.noteNameSystem}
 						onChange={handleChange}
