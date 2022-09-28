@@ -136,6 +136,9 @@ class Metronome {
 		nextBeatTime: 0,
 		beatDuration: 0.05,
 	};
+
+	static MIN = 50;
+	static MAX = 360;
 }
 
 export default Metronome;
