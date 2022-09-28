@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import Metronome from '../../lib/classes/Metronome';
 import { BsChevronCompactUp, BsChevronCompactDown } from 'react-icons/bs';
+import React from 'react';
 
 const MetronomeComponent = () => {
 	const [pingPong, setPingPong] = useState(false);
-	const metronome = useRef<Metronome>(new Metronome());
+	const metronome = useRef<Metronome | undefined>();
 	const [play, setPlay] = useState(false);
 
 	const startStop = () => {
@@ -13,9 +14,10 @@ const MetronomeComponent = () => {
 	};
 
 	useEffect(() => {
+		metronome.current = new Metronome();
 		metronome.current.onBeat(() => setPingPong((prev) => !prev));
 		return () => {
-			metronome.current.worker.terminate;
+			metronome.current?.worker.terminate();
 		};
 	}, []);
 
@@ -68,4 +70,4 @@ const MetronomeComponent = () => {
 	);
 };
 
-export default MetronomeComponent;
+export default React.memo(MetronomeComponent);

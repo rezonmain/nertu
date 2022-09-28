@@ -46,7 +46,6 @@ function Tuner() {
 				/>
 				<LinearTuningLane data={store} color={color} />
 				<LoudnessMeter loudness={store?.loudness} color={color} />
-				<MetronomeComponent />
 			</div>
 		</>
 	);
