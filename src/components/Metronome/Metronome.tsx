@@ -22,8 +22,11 @@ const MetronomeComponent = () => {
 		const bpm = e.target.valueAsNumber
 			? constrain(Metronome.MIN, Metronome.MAX, e.target.valueAsNumber)
 			: Metronome.MIN;
+		// Set metronome tempo
 		metronome.current?.setTempo(bpm);
+		// Save metronome setting
 		dispatch({ type: 'changeBPM', payload: bpm });
+		// Update local state
 		setLocal(bpm);
 	};
 

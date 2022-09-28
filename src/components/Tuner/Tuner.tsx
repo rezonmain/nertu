@@ -41,7 +41,7 @@ function Tuner() {
 			<Header onSettings={() => setSettingsToggle()} />
 			<div
 				id='content-container'
-				className='p-10 my-auto w-full h-screen flex flex-col justify-between'
+				className='py-10 my-auto w-full h-screen flex flex-col justify-between'
 			>
 				<span id='layout-dummy'></span>
 				<div id='tuner+loudness-meter'>
@@ -52,7 +52,10 @@ function Tuner() {
 					<LinearTuningLane data={store} color={color} />
 					<LoudnessMeter loudness={store?.loudness} color={color} />
 				</div>
-				<div id='widgets' className='w-full flex flex-row justify-between'>
+				<div
+					id='widgets'
+					className='w-full px-5 flex flex-row justify-between sm:max-w-3xl xl:px-0 xl:max-w-5xl mx-auto'
+				>
 					<MetronomeComponent />
 					<div>tuning fork</div>
 				</div>
