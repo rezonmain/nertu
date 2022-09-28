@@ -22,7 +22,7 @@ class Metronome {
 	isPlaying: boolean;
 	onBeatCallback = () => {};
 
-	constructor(audioContext?: AudioContext, tempo = 120, params?: TimingParams) {
+	constructor(tempo = 120, audioContext?: AudioContext, params?: TimingParams) {
 		this.tempo = tempo;
 		this.audioContext = audioContext;
 		this.timing = {

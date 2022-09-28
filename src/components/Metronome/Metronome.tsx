@@ -20,7 +20,7 @@ const MetronomeComponent = ({
 	};
 
 	useEffect(() => {
-		metronome.current = new Metronome();
+		metronome.current = new Metronome(settings.metronome.bpm);
 		metronome.current.onBeat(() => setPingPong((prev) => !prev));
 		return () => {
 			metronome.current?.worker.terminate();
