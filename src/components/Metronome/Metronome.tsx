@@ -3,7 +3,11 @@ import Metronome from '../../lib/classes/Metronome';
 import { BsChevronCompactUp, BsChevronCompactDown } from 'react-icons/bs';
 import React from 'react';
 
-const MetronomeComponent = () => {
+const MetronomeComponent = ({
+	audioContext,
+}: {
+	audioContext?: AudioContext;
+}) => {
 	const [pingPong, setPingPong] = useState(false);
 	const metronome = useRef<Metronome | undefined>();
 	const [play, setPlay] = useState(false);

@@ -15,27 +15,22 @@ interface TimingParams {
 
 class Metronome {
 	tempo;
-	audioContext;
-	oscillator: Oscillator;
+	audioContext: AudioContext | undefined;
+	oscillator: Oscillator | undefined;
 	timing: TimingParams;
 	beatQueue: number[];
 	worker;
 	isPlaying: boolean;
 	onBeatCallback = () => {};
 
-	constructor(
-		tempo = 120,
-		audioContext = new AudioContext(),
-		params?: TimingParams
-	) {
+	constructor(audioContext?: AudioContext, tempo = 120, params?: TimingParams) {
 		this.tempo = tempo;
 		this.audioContext = audioContext;
 		this.timing = {
 			...Metronome.DEF_PARAMS,
 			...params,
 		};
-		this.oscillator = new Oscillator();
-		this.oscillator.setParams({ amplitude: 0.75 });
+		this.oscillator = undefined;
 		this.beatQueue = [];
 		this.isPlaying = false;
 		// See: https://vitejs.dev/guide/features.html#import-with-constructors
@@ -54,6 +49,7 @@ class Metronome {
 	}
 
 	private scheduleBeat() {
+		if (!this.audioContext || !this.oscillator) return;
 		while (
 			this.timing.nextBeatTime <
 			this.audioContext.currentTime + this.timing.scheduleAhead
@@ -79,7 +75,7 @@ class Metronome {
 		const callback = this.onBeatCallback;
 
 		const frameLoop = () => {
-			if (!this.isPlaying) return;
+			if (!this.isPlaying || !this.audioContext) return;
 			const time = this.audioContext.currentTime;
 			while (queue.length && queue[0] < time) {
 				queue.shift();
@@ -101,6 +97,9 @@ class Metronome {
 	}
 
 	start() {
+		this.audioContext = this.audioContext ?? new AudioContext();
+		this.oscillator = this.oscillator ?? new Oscillator(this.audioContext);
+		this.oscillator.setParams({ amplitude: 0.75 });
 		this.timing.nextBeatTime = this.audioContext.currentTime;
 		this.isPlaying = true;
 		this.worker.postMessage('start');
@@ -124,7 +123,7 @@ class Metronome {
 	 * Calcualte tap tempo, meant to be called on user interaction.
 	 */
 	getTapTempo() {
-		console.log(this.audioContext.currentTime);
+		console.log('tap');
 	}
 
 	static DEF_PARAMS: TimingParams = {

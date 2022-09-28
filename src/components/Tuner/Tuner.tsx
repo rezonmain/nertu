@@ -15,7 +15,7 @@ export interface TunerData extends Note, Pitch {}
 
 function Tuner() {
 	const { settings } = useSettings();
-	const { getPitch, getMedia, media } = usePitch();
+	const { getPitch, getMedia, media, audioContext } = usePitch();
 	const [store, setStore] = useState<TunerData | undefined>(undefined);
 	const [settingsToggle, setSettingsToggle] = useDisclosure(false);
 
@@ -46,6 +46,7 @@ function Tuner() {
 				/>
 				<LinearTuningLane data={store} color={color} />
 				<LoudnessMeter loudness={store?.loudness} color={color} />
+				<MetronomeComponent />
 			</div>
 		</>
 	);
