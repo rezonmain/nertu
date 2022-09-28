@@ -71,9 +71,18 @@ const MetronomeComponent = () => {
 					Tap
 				</span>
 				<div id='tempo-input' className='flex flex-col items-center'>
-					<form onSubmit={(e) => e.preventDefault()}>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							const input = document.querySelector(
+								'input[name="metronome-bpm"'
+							) as HTMLElement;
+							input.blur();
+						}}
+					>
 						<label>
 							<input
+								name='metronome-bpm'
 								onBlur={onBPM}
 								onChange={(e) => setLocal(e.target.valueAsNumber)}
 								value={local}

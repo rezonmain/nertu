@@ -44,7 +44,7 @@ function Tuner() {
 				className='py-10 my-auto w-full h-screen flex flex-col justify-between'
 			>
 				<span id='layout-dummy'></span>
-				<div id='tuner+loudness-meter'>
+				<div id='tuner+loudness-meter' className='px-10'>
 					<Settings
 						visible={settingsToggle}
 						onSettings={() => setSettingsToggle()}
