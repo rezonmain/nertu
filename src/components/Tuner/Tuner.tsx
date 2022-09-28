@@ -9,6 +9,7 @@ import Header from '../Header/Header';
 import Settings from '../Settings/Settings';
 import { useSettings } from '../../lib/context/settingsContext';
 import useDisclosure from '../../lib/hooks/useDisclosure';
+import MetronomeComponent from '../Metronome/Metronome';
 
 export interface TunerData extends Note, Pitch {}
 
@@ -45,6 +46,7 @@ function Tuner() {
 				/>
 				<LinearTuningLane data={store} color={color} />
 				<LoudnessMeter loudness={store?.loudness} color={color} />
+				<MetronomeComponent />
 			</div>
 		</>
 	);

@@ -24,7 +24,7 @@ const ControlModal = ({
 						}}
 						onClick={onCancel}
 						id='control-modal-bg'
-						className='absolute top-0 left-0 w-full h-full bg-black'
+						className='absolute h-full w-full top-0 left-0 bg-black'
 					></motion.div>
 					<motion.div
 						initial={{ opacity: 0 }}

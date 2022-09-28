@@ -1,78 +1,83 @@
-import TET, { NoteName } from './TET';
+interface OscillatorParams {
+	amplitude: number;
+	frequency: number;
+	shape: OscillatorType;
+}
 
 class Oscillator {
 	audioContext: AudioContext;
-	oscillator: OscillatorNode;
+	oscillator: OscillatorNode | null;
 	gainNode: GainNode;
-	tet: TET;
+	params: OscillatorParams;
 
-	constructor(startingFrequency?: number) {
-		this.audioContext = new AudioContext();
-		this.oscillator = this.audioContext.createOscillator();
-		this.oscillator.frequency.value = startingFrequency ?? 440;
+	constructor(audioContext = new AudioContext()) {
+		this.audioContext = audioContext;
+		this.oscillator = null;
 		this.gainNode = this.audioContext.createGain();
-		this.gainNode.gain.value = Oscillator.initialAmplitude;
-		this.oscillator.connect(this.gainNode);
 		this.gainNode.connect(this.audioContext.destination);
-		this.tet = new TET();
+		this.params = Oscillator.DEF_PARAMS;
 	}
 
-	setParams({
-		amplitude,
-		noteName,
-		octave,
-		cents,
-		shape,
-	}: {
-		amplitude: number;
-		noteName: NoteName;
-		octave: number;
-		cents: number;
-		shape: OscillatorType;
+	setParams(params?: {
+		amplitude?: number;
+		frequency?: number;
+		shape?: OscillatorType;
 	}) {
-		this.gainNode.gain.value = amplitude;
-		this.oscillator.frequency.value = this.tet.toFrequency({
-			noteName,
-			octave,
-			cents,
-			ref: this.tet.A,
-		});
-		this.oscillator.type = shape;
+		this.params = {
+			...this.params,
+			...params,
+		};
 	}
 
 	set shape(type: OscillatorType) {
-		this.oscillator.type = type;
+		this.params.shape = type;
+		if (this.oscillator) {
+			this.oscillator.type = type;
+		}
 	}
 
 	get shape() {
-		return this.oscillator.type;
+		return this.params.shape;
 	}
 
 	set amplitude(a: number) {
+		this.params.amplitude = a;
 		this.gainNode.gain.value = a;
 	}
 
 	get amplitude() {
-		return this.gainNode.gain.value;
+		return this.params.amplitude;
 	}
 
 	set frequency(f: number) {
-		this.oscillator.frequency.value = f;
+		this.params.frequency = f;
+		if (this.oscillator) {
+			this.oscillator.frequency.value = f;
+		}
 	}
 
 	get frequency() {
-		return this.oscillator.frequency.value;
+		return this.params.frequency;
 	}
 
-	start() {
-		this.oscillator.start();
+	start(when?: number) {
+		this.oscillator = this.audioContext.createOscillator();
+		this.oscillator.connect(this.gainNode);
+		this.gainNode.gain.value = this.params.amplitude;
+		this.oscillator.type = this.params.shape;
+		this.oscillator.frequency.value = this.params.frequency;
+		this.oscillator.start(when);
 	}
 
-	stop() {
-		this.oscillator.stop();
+	stop(when?: number) {
+		this.oscillator!.stop(when);
 	}
 
-	static initialAmplitude = 0.2;
+	static DEF_PARAMS: OscillatorParams = {
+		amplitude: 0.2,
+		frequency: 440,
+		shape: 'sine',
+	};
 }
 
 export default Oscillator;
