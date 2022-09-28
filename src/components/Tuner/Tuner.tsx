@@ -15,7 +15,7 @@ export interface TunerData extends Note, Pitch {}
 
 function Tuner() {
 	const { settings } = useSettings();
-	const { getPitch, getMedia, media, audioContext } = usePitch();
+	const { getPitch, getMedia, media } = usePitch();
 	const [store, setStore] = useState<TunerData | undefined>(undefined);
 	const [settingsToggle, setSettingsToggle] = useDisclosure(false);
 

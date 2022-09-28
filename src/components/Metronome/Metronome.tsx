@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Metronome from '../../lib/classes/Metronome';
 import { BsChevronCompactUp, BsChevronCompactDown } from 'react-icons/bs';
 import React from 'react';
+import { useSettings } from '../../lib/context/settingsContext';
 
 const MetronomeComponent = ({
 	audioContext,
@@ -10,6 +11,7 @@ const MetronomeComponent = ({
 }) => {
 	const [pingPong, setPingPong] = useState(false);
 	const metronome = useRef<Metronome | undefined>();
+	const { settings } = useSettings();
 	const [play, setPlay] = useState(false);
 
 	const startStop = () => {
@@ -62,9 +64,7 @@ const MetronomeComponent = ({
 					<div>
 						<BsChevronCompactUp />
 					</div>
-					<span className='text-lg select-none'>
-						{metronome.current?.tempo}
-					</span>
+					<span className='text-lg select-none'>{settings.metronome.bpm}</span>
 					<div>
 						<BsChevronCompactDown />
 					</div>

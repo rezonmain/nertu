@@ -3,18 +3,23 @@ export class TunerSettings {
 	showEnharmonic: boolean;
 	transposition: number;
 	noteNameSystem: number;
+	metronome: {
+		bpm: number;
+	};
 
 	// Default values:
 	constructor(
 		A = TunerSettings.DEF.A,
 		showEnharmonic = TunerSettings.DEF.showEnharmonic,
 		transposition = TunerSettings.DEF.transposition,
-		noteNameSystems = TunerSettings.DEF.noteNameSystems
+		noteNameSystems = TunerSettings.DEF.noteNameSystems,
+		metronome = TunerSettings.DEF.metronome
 	) {
 		this.A = A;
 		this.showEnharmonic = showEnharmonic;
 		this.transposition = transposition;
 		this.noteNameSystem = noteNameSystems;
+		this.metronome = metronome;
 		return {
 			...this,
 		};
@@ -25,6 +30,9 @@ export class TunerSettings {
 		showEnharmonic: true,
 		transposition: 0,
 		noteNameSystems: 0,
+		metronome: {
+			bpm: 120,
+		},
 	};
 }
 

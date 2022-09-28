@@ -96,7 +96,12 @@ class Metronome {
 		this.onBeatCallback = callback;
 	}
 
+	/**
+	 * Start playing sound, this function must be on a call stack
+	 * triggered by user interaction. See: https://goo.gl/7K7WLu
+	 */
 	start() {
+		// Audio context must be created or resumed on user interaction
 		this.audioContext = this.audioContext ?? new AudioContext();
 		this.oscillator = this.oscillator ?? new Oscillator(this.audioContext);
 		this.oscillator.setParams({ amplitude: 0.75 });
@@ -128,8 +133,8 @@ class Metronome {
 
 	static DEF_PARAMS: TimingParams = {
 		// In seconds:
-		lookAhead: 0.05,
-		scheduleAhead: 0.2,
+		lookAhead: 0.025,
+		scheduleAhead: 0.1,
 		nextBeatTime: 0,
 		beatDuration: 0.05,
 	};

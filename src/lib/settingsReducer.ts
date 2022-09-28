@@ -5,7 +5,8 @@ export interface SettingsAction {
 		| 'changeReference'
 		| 'toggleEnharmonic'
 		| 'changeTransposition'
-		| 'changeNoteSystem';
+		| 'changeNoteSystem'
+		| 'changeBPM';
 	payload?: unknown;
 }
 
@@ -32,6 +33,11 @@ const settingsReducer = (
 		case 'changeNoteSystem':
 			newState = { ...state, noteNameSystem: payload as number };
 			break;
+		case 'changeBPM':
+			newState = {
+				...state,
+				metronome: { ...state.metronome, bpm: payload as number },
+			};
 		default:
 			newState = state;
 			break;
