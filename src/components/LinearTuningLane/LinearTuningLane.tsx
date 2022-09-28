@@ -61,7 +61,7 @@ const LinearTuningLane = ({
 				</animated.span>
 
 				<div className='border border-stone-300 w-full h-0'></div>
-				<div className='outline outline-stone-300 h-7 aspect-square rounded-full'></div>
+				<div className='ring-2 ring-stone-300 h-7 aspect-square rounded-full'></div>
 				<div className='border border-stone-300 w-full h-0'></div>
 
 				<animated.span

@@ -101,6 +101,7 @@ class Metronome {
 	 */
 	start() {
 		this.audioContext = this.audioContext ?? new AudioContext();
+		this.audioContext.resume();
 		this.oscillator = this.oscillator ?? new Oscillator(this.audioContext);
 		this.oscillator.setParams({ amplitude: 0.75 });
 		this.timing.nextBeatTime = this.audioContext.currentTime;
@@ -110,6 +111,7 @@ class Metronome {
 	}
 
 	stop() {
+		this.audioContext?.suspend();
 		this.isPlaying = false;
 		this.worker.postMessage('stop');
 	}
