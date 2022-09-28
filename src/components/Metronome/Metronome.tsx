@@ -4,19 +4,20 @@ import { BsChevronCompactUp, BsChevronCompactDown } from 'react-icons/bs';
 import React from 'react';
 import { useSettings } from '../../lib/context/settingsContext';
 
-const MetronomeComponent = ({
-	audioContext,
-}: {
-	audioContext?: AudioContext;
-}) => {
+const MetronomeComponent = () => {
 	const [pingPong, setPingPong] = useState(false);
 	const metronome = useRef<Metronome | undefined>();
-	const { settings } = useSettings();
+	const { settings, dispatch } = useSettings();
 	const [play, setPlay] = useState(false);
 
 	const startStop = () => {
 		play ? metronome.current?.stop() : metronome.current?.start();
 		setPlay((prev) => !prev);
+	};
+
+	const onBPM = (bpm: number) => {
+		metronome.current?.setTempo(bpm);
+		dispatch({ type: 'changeBPM', payload: bpm });
 	};
 
 	useEffect(() => {
@@ -50,7 +51,6 @@ const MetronomeComponent = ({
 				></span>
 			</div>
 			<div
-				onClick={() => metronome.current?.getTapTempo()}
 				id='metronome-controls'
 				className='flex flex-row justify-between items-center gap-3'
 			>

@@ -19,6 +19,7 @@ const settingsReducer = (
 	action: SettingsAction
 ): TunerSettings => {
 	const { type, payload } = action;
+	console.log(payload);
 	let newState: TunerSettings;
 	switch (type) {
 		case 'changeReference':
@@ -38,6 +39,7 @@ const settingsReducer = (
 				...state,
 				metronome: { ...state.metronome, bpm: payload as number },
 			};
+			break;
 		default:
 			newState = state;
 			break;
