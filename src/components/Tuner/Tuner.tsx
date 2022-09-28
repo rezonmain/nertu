@@ -41,7 +41,7 @@ function Tuner() {
 			<Header onSettings={() => setSettingsToggle()} />
 			<div
 				id='content-container'
-				className='py-10 my-auto w-full h-screen flex flex-col justify-between'
+				className='py-10 my-auto w-full h-screen flex flex-col justify-between gap-20'
 			>
 				<span id='layout-dummy'></span>
 				<div id='tuner+loudness-meter' className='px-10'>

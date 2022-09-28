@@ -10,7 +10,7 @@ const MetronomeComponent = () => {
 	const metronome = useRef<Metronome | undefined>();
 	const { settings, dispatch } = useSettings();
 	const [play, setPlay] = useState(false);
-	const [local, setLocal] = useState(settings.metronome.bpm);
+	const [local, setLocal] = useState(settings.metronome.bpm.toString());
 
 	const startStop = () => {
 		play ? metronome.current?.stop() : metronome.current?.start();
@@ -19,7 +19,7 @@ const MetronomeComponent = () => {
 
 	const onBPM = (e: ChangeEvent<HTMLInputElement>) => {
 		// Input validation
-		const bpm = e.target.valueAsNumber
+		const bpm = e.target.value
 			? constrain(Metronome.MIN, Metronome.MAX, e.target.valueAsNumber)
 			: Metronome.MIN;
 		// Set metronome tempo
@@ -27,7 +27,7 @@ const MetronomeComponent = () => {
 		// Save metronome setting
 		dispatch({ type: 'changeBPM', payload: bpm });
 		// Update local state
-		setLocal(bpm);
+		setLocal(bpm.toString());
 	};
 
 	useEffect(() => {
@@ -84,11 +84,11 @@ const MetronomeComponent = () => {
 							<input
 								name='metronome-bpm'
 								onBlur={onBPM}
-								onChange={(e) => setLocal(e.target.valueAsNumber)}
+								onChange={(e) => setLocal(e.target.value ? e.target.value : '')}
 								value={local}
 								type='number'
 								style={{
-									width: `${local.toString().length}ch`,
+									width: `${local.length ? local.length : 1}ch`,
 								}}
 								className='appearance-none bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
 							/>

@@ -125,9 +125,7 @@ class Metronome {
 	/**
 	 * Calcualte tap tempo, meant to be called on user interaction.
 	 */
-	getTapTempo() {
-		console.log('tap');
-	}
+	getTapTempo() {}
 
 	static DEF_PARAMS: TimingParams = {
 		// In seconds:
