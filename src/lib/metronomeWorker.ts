@@ -1,4 +1,4 @@
-let id: number | undefined = 0;
+let id: number;
 let interval = 25;
 
 self.onmessage = (e: MessageEvent) => {
@@ -9,7 +9,6 @@ self.onmessage = (e: MessageEvent) => {
 			break;
 		case 'stop':
 			clearInterval(id);
-			id = undefined;
 			break;
 	}
 };

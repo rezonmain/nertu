@@ -28,7 +28,7 @@ const MetronomeComponent = ({
 	}, []);
 
 	return (
-		<div id='metronome' className='flex flex-col gap-3 w-[80px] h-fit'>
+		<div id='metronome' className='flex flex-col gap-3 w-fit h-fit'>
 			<div
 				onClick={startStop}
 				id='metronome-toggle'
@@ -64,7 +64,9 @@ const MetronomeComponent = ({
 					<div>
 						<BsChevronCompactUp />
 					</div>
-					<span className='text-lg select-none'>{settings.metronome.bpm}</span>
+					<span className='text-lg select-none'>
+						{settings.metronome.bpm} <small>bpm</small>
+					</span>
 					<div>
 						<BsChevronCompactDown />
 					</div>

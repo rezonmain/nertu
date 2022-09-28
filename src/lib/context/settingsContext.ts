@@ -7,7 +7,10 @@ export type SettingsContext = {
 	dispatch: Dispatch<SettingsAction>;
 };
 
-// look for saved settings and used them if found
+/*
+ * Look for saved settings and used them if found,
+ * otherwise use default settings
+ */
 export const SettingsContext = createContext<SettingsContext>({
 	settings: (() => {
 		const saved = localStorage.getItem('settings');

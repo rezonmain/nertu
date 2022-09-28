@@ -1,7 +1,6 @@
 /*
  * Implementation of a robust metronome based on the article and implementation by
  * Chris Wilson, see: https://web.dev/audio-scheduling/ & https://github.com/cwilso/metronome/
- * https://vitejs.dev/guide/features.html#import-with-constructors
  */
 
 import Oscillator from './Oscillator';
@@ -65,8 +64,8 @@ class Metronome {
 	private testOnBeat() {
 		/*
 		 * Set up variables for frameLoop closure;
-		 * So the requestCallback has reference to them
-		 * this is to avoid binding the this object
+		 * So the requestCallback has reference to them,
+		 * this is to avoid binding the `this` object
 		 * to the requestCallback, and avoid making
 		 * a new function reference every frame.
 		 * See: https://stackoverflow.com/a/48817802
@@ -90,7 +89,7 @@ class Metronome {
 	/**
 	 * Provide a callback function to run on every beat, useful for
 	 * updating visual elements on the beat.
-	 * @param callback callback function to run on every beat
+	 * @param callback callback function to run on every beat.
 	 */
 	onBeat(callback: () => void) {
 		this.onBeatCallback = callback;
@@ -101,7 +100,6 @@ class Metronome {
 	 * triggered by user interaction. See: https://goo.gl/7K7WLu
 	 */
 	start() {
-		// Audio context must be created or resumed on user interaction
 		this.audioContext = this.audioContext ?? new AudioContext();
 		this.oscillator = this.oscillator ?? new Oscillator(this.audioContext);
 		this.oscillator.setParams({ amplitude: 0.75 });
