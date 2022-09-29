@@ -4,7 +4,7 @@ No-nonsense, easy to use tuner webapp 🎷
 
 Visit: [nertu.app](https://nertu.app)
 
-<img width="100px" src="public/preview.png" alt="Nertu webapp preview" />
+<img width="450px" src="public/preview.png" alt="Nertu webapp preview" />
 
 # Desgin
 
