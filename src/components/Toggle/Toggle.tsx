@@ -7,9 +7,9 @@ const Toggle = ({
 	onToggle: () => void;
 	value: boolean;
 }) => {
-	const laneActive = '#d946ef';
+	const laneActive = '#e879f9';
 	const laneInactive = '#44403c';
-	const indicatorActive = '#a21caf';
+	const indicatorActive = '#c026d3';
 	const indicatorInactive = '#f5f5f4';
 
 	const indicatorProps = useSpring({

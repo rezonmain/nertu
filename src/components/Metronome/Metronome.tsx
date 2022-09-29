@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import Metronome from '../../lib/classes/Metronome';
-import { BsChevronCompactUp, BsChevronCompactDown } from 'react-icons/bs';
 import React from 'react';
 import { useSettings } from '../../lib/context/settingsContext';
 import constrain from '../../lib/utils/constrain';
+import countNumeric from '../../lib/utils/countNumeric';
 
 const MetronomeComponent = () => {
 	const [pingPong, setPingPong] = useState(false);
@@ -28,6 +28,15 @@ const MetronomeComponent = () => {
 		dispatch({ type: 'changeBPM', payload: bpm });
 		// Update local state
 		setLocal(bpm.toString());
+	};
+
+	const onTap = () => {
+		const tapTempo = metronome.current?.getTapTempo();
+		if (tapTempo) {
+			metronome.current?.setTempo(tapTempo);
+			dispatch({ type: 'changeBPM', payload: tapTempo });
+			setLocal(tapTempo.toString());
+		}
 	};
 
 	useEffect(() => {
@@ -65,6 +74,7 @@ const MetronomeComponent = () => {
 				className='flex flex-row justify-between items-center gap-3'
 			>
 				<span
+					onClick={onTap}
 					id='tap-tempo'
 					className='block select-none cursor-pointer p-2 rounded-md border-2 border-stone-500 active:border-fuchsia-600 transition-colors'
 				>
@@ -87,8 +97,9 @@ const MetronomeComponent = () => {
 								onChange={(e) => setLocal(e.target.value ? e.target.value : '')}
 								value={local}
 								type='number'
+								step='0.1'
 								style={{
-									width: `${local.length ? local.length : 1}ch`,
+									width: `${local.length ? countNumeric(local) : 1}ch`,
 								}}
 								className='appearance-none bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
 							/>

@@ -3,6 +3,7 @@
  * Chris Wilson, see: https://web.dev/audio-scheduling/ & https://github.com/cwilso/metronome/
  */
 
+import constrain from '../utils/constrain';
 import Oscillator from './Oscillator';
 
 interface TimingParams {
@@ -18,6 +19,10 @@ class Metronome {
 	oscillator: Oscillator | undefined;
 	timing: TimingParams;
 	beatQueue: number[];
+	tapTempo: {
+		queue: number[];
+		timeout: number;
+	};
 	worker;
 	isPlaying: boolean;
 	onBeatCallback = () => {};
@@ -31,6 +36,7 @@ class Metronome {
 		};
 		this.oscillator = undefined;
 		this.beatQueue = [];
+		this.tapTempo = { queue: [], timeout: 0 };
 		this.isPlaying = false;
 		// See: https://vitejs.dev/guide/features.html#import-with-constructors
 		this.worker = new Worker(
@@ -127,7 +133,38 @@ class Metronome {
 	/**
 	 * Calcualte tap tempo, meant to be called on user interaction.
 	 */
-	getTapTempo() {}
+	getTapTempo() {
+		this.tapTempo.queue.push(Date.now());
+
+		// Reset the queue clear timer
+		clearTimeout(this.tapTempo.timeout);
+
+		// Clear the time queue if no input was detected in 2 seconds
+		this.tapTempo.timeout = setTimeout(() => {
+			this.tapTempo.queue = [];
+			console.log('cleared');
+		}, 2000);
+
+		// Calculate the tempo from the input time deltas
+		if (this.tapTempo.queue.length > 1) {
+			const q = this.tapTempo.queue;
+			const averageDelta =
+				q
+					// Get the difference between times
+					.map((v, i) => q[i + 1] - v)
+					// Remove the NaN as difference will be arr.len - 1
+					.filter((v) => v)
+					// Sum the differences
+					.reduce((c, p) => c + p) /
+				// Divide by length of differences to get average
+				(q.length - 1);
+			return constrain(
+				Metronome.MIN,
+				Metronome.MAX,
+				Math.round(60 / (averageDelta / 1000))
+			);
+		}
+	}
 
 	static DEF_PARAMS: TimingParams = {
 		// In seconds:
