@@ -20,7 +20,7 @@ const LoudnessMeter = ({
 	const wProp = useSpring({ to: { width: w }, from: { width: prev.current } });
 
 	return (
-		<div
+		<article
 			id='loudenss-indicator'
 			className='flex flex-col gap-2 mx-auto max-w-md font-mono w-full'
 		>
@@ -51,7 +51,7 @@ const LoudnessMeter = ({
 				<span>{range.min}dB</span>
 				<span>{range.max}dB</span>
 			</div>
-		</div>
+		</article>
 	);
 };
 

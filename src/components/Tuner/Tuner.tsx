@@ -39,27 +39,24 @@ function Tuner() {
 		<>
 			<PermissionModal visible={!media} onAsk={() => getMedia()} />
 			<Header onSettings={() => setSettingsToggle()} />
-			<div
-				id='content-container'
-				className='py-10 my-auto w-full h-screen flex flex-col justify-between gap-20'
-			>
+			<main className='py-10 my-auto w-full h-screen flex flex-col justify-between gap-20'>
 				<span id='layout-dummy'></span>
-				<div id='tuner+loudness-meter' className='px-10'>
+				<section id='tuner+loudness-meter' className='px-10'>
 					<Settings
 						visible={settingsToggle}
 						onSettings={() => setSettingsToggle()}
 					/>
 					<LinearTuningLane data={store} color={color} />
 					<LoudnessMeter loudness={store?.loudness} color={color} />
-				</div>
-				<div
+				</section>
+				<section
 					id='widgets'
 					className='w-full px-5 flex flex-row justify-between sm:max-w-3xl xl:px-0 xl:max-w-5xl mx-auto'
 				>
 					<MetronomeComponent />
 					<div></div>
-				</div>
-			</div>
+				</section>
+			</main>
 		</>
 	);
 }

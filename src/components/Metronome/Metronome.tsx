@@ -51,7 +51,7 @@ const MetronomeComponent = () => {
 	}, []);
 
 	return (
-		<div id='metronome' className='flex flex-col gap-3 w-fit h-fit'>
+		<article id='metronome' className='flex flex-col gap-3 w-fit h-fit'>
 			<div
 				onClick={startStop}
 				id='metronome-toggle'
@@ -76,42 +76,41 @@ const MetronomeComponent = () => {
 				id='metronome-controls'
 				className='flex flex-row justify-between items-center gap-3'
 			>
-				<span
+				<button
 					onClick={onTap}
 					id='tap-tempo'
 					className='block select-none cursor-pointer p-2 rounded-md border-2 border-stone-500 active:border-fuchsia-600 transition-colors'
 				>
 					Tap
-				</span>
-				<div id='tempo-input' className='flex flex-col items-center'>
-					<form
-						onSubmit={(e) => {
-							e.preventDefault();
-							const input = document.querySelector(
-								'input[name="metronome-bpm"'
-							) as HTMLElement;
-							input.blur();
-						}}
-					>
-						<label>
-							<input
-								name='metronome-bpm'
-								onBlur={onBPM}
-								onChange={(e) => setLocal(e.target.value ? e.target.value : '')}
-								value={local}
-								type='number'
-								step='0.1'
-								style={{
-									width: `${local.length ? countNumeric(local) : 1}ch`,
-								}}
-								className='appearance-none bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
-							/>
-							<small> bpm</small>
-						</label>
-					</form>
-				</div>
+				</button>
+				<form
+					className='flex flex-col items-center'
+					onSubmit={(e) => {
+						e.preventDefault();
+						const input = document.querySelector(
+							'input[name="metronome-bpm"'
+						) as HTMLElement;
+						input.blur();
+					}}
+				>
+					<label>
+						<input
+							name='metronome-bpm'
+							onBlur={onBPM}
+							onChange={(e) => setLocal(e.target.value ? e.target.value : '')}
+							value={local}
+							type='number'
+							step='0.1'
+							style={{
+								width: `${local.length ? countNumeric(local) : 1}ch`,
+							}}
+							className='appearance-none bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
+						/>
+						<small> bpm</small>
+					</label>
+				</form>
 			</div>
-		</div>
+		</article>
 	);
 };
 

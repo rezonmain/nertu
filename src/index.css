@@ -12,6 +12,10 @@
 	color-scheme: dark;
 }
 
+body {
+	background-color: black;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Hook to handle toggle states, toggles false on back button,
+ * Hook to handle toggle states, toggles false on back button, and escape keydown,
    used for modals or menus for example.
  * @param initial Initial state, defaults to false
  * @returns [state, state dispatcher function]
@@ -23,11 +23,18 @@ const useDisclosure = (initial = false): [boolean, () => void] => {
 		setDispatchToggle((prev) => !prev);
 	};
 
+	const handleKeyDown = (ev: KeyboardEvent) => {
+		ev.key === 'Escape' && setDispatchToggle(false);
+	};
+
 	useEffect(() => {
 		// Listen to back events, on back event set toggle to false
 		window.addEventListener('popstate', () => setDispatchToggle(false));
-		return () =>
+		window.addEventListener('keydown', handleKeyDown);
+		return () => {
 			window.removeEventListener('popstate', () => setDispatchToggle(false));
+			window.removeEventListener('keydown', handleKeyDown);
+		};
 	}, [toggle]);
 
 	return [toggle, setToggle];

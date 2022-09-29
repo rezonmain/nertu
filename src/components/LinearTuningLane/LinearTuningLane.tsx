@@ -21,7 +21,7 @@ const LinearTuningLane = ({
 	});
 
 	return (
-		<div
+		<article
 			id='tuner-container'
 			className='mx-auto w-full max-w-md flex flex-col justify-center font-mono'
 		>
@@ -74,7 +74,7 @@ const LinearTuningLane = ({
 				></animated.span>
 			</div>
 			<NoteIndicator note={data?.noteName} octave={data?.octave} />
-		</div>
+		</article>
 	);
 };
 export default LinearTuningLane;
