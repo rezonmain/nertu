@@ -15,6 +15,9 @@ module.exports = {
 					'sans-serif',
 				],
 			},
+			screens: {
+				short: { raw: '(max-height: 500px)' },
+			},
 		},
 	},
 	plugins: [],
