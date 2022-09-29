@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
-/* Hook to handle toggle states, that toggles false on back button
-   used for modals or menus for example */
+/**
+ * Hook to handle toggle states, toggles false on back button,
+   used for modals or menus for example.
+ * @param initial Initial state, defaults to false
+ * @returns [state, state dispatcher function]
+ */
 const useDisclosure = (initial = false): [boolean, () => void] => {
 	const [toggle, setDispatchToggle] = useState(initial);
 
@@ -11,7 +15,7 @@ const useDisclosure = (initial = false): [boolean, () => void] => {
 			   and can be used to toggle state */
 			window.history.pushState({}, '');
 		} else {
-			/* If user didn't use back button, rather a defined exit button
+			/* If user didn't use back button, rather a defined exit button,
 			   pop the history so not to accumulate history states */
 			window.history.back();
 		}

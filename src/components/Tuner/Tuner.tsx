@@ -57,7 +57,7 @@ function Tuner() {
 					className='w-full px-5 flex flex-row justify-between sm:max-w-3xl xl:px-0 xl:max-w-5xl mx-auto'
 				>
 					<MetronomeComponent />
-					<div>tuning fork</div>
+					<div></div>
 				</div>
 			</div>
 		</>

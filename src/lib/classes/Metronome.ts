@@ -25,9 +25,9 @@ class Metronome {
 		queue: number[];
 		timeout: number;
 	};
+	private onBeatCallback = () => {};
 	worker;
 	isPlaying: boolean;
-	onBeatCallback = () => {};
 
 	constructor(tempo = 120, audioContext?: AudioContext, params?: TimingParams) {
 		this.internTempo = tempo;
@@ -98,10 +98,6 @@ class Metronome {
 		return this.internTempo;
 	}
 
-	/**
-	 * Set tempo of the quarter note, can be set while playing.
-	 * @param tempo bpm
-	 */
 	set tempo(tempo: number) {
 		this.internTempo = tempo;
 	}
