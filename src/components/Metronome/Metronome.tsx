@@ -18,12 +18,13 @@ const MetronomeComponent = () => {
 	};
 
 	const onBPM = (e: ChangeEvent<HTMLInputElement>) => {
+		if (!metronome.current) return;
 		// Input validation
 		const bpm = e.target.value
 			? constrain(Metronome.MIN, Metronome.MAX, e.target.valueAsNumber)
 			: Metronome.MIN;
 		// Set metronome tempo
-		metronome.current?.setTempo(bpm);
+		metronome.current.tempo = bpm;
 		// Save metronome setting
 		dispatch({ type: 'changeBPM', payload: bpm });
 		// Update local state
@@ -31,14 +32,16 @@ const MetronomeComponent = () => {
 	};
 
 	const onTap = () => {
-		const tapTempo = metronome.current?.getTapTempo();
+		if (!metronome.current) return;
+		const tapTempo = metronome.current.getTapTempo();
 		if (tapTempo) {
-			metronome.current?.setTempo(tapTempo);
+			metronome.current.tempo = tapTempo;
 			dispatch({ type: 'changeBPM', payload: tapTempo });
 			setLocal(tapTempo.toString());
 		}
 	};
 
+	// Set up metronome object and onBeat callback
 	useEffect(() => {
 		metronome.current = new Metronome(settings.metronome.bpm);
 		metronome.current.onBeat(() => setPingPong((prev) => !prev));

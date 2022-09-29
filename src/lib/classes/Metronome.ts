@@ -1,6 +1,8 @@
 /*
- * Implementation of a robust metronome based on the article and implementation by
+ * Implementation of a robust metronome based on the article and code by
  * Chris Wilson, see: https://web.dev/audio-scheduling/ & https://github.com/cwilso/metronome/
+ *
+ * Tap tempo implementation is of my own.
  */
 
 import constrain from '../utils/constrain';
@@ -14,12 +16,12 @@ interface TimingParams {
 }
 
 class Metronome {
-	tempo;
-	audioContext: AudioContext | undefined;
-	oscillator: Oscillator | undefined;
-	timing: TimingParams;
-	beatQueue: number[];
-	tapTempo: {
+	private internTempo;
+	private audioContext: AudioContext | undefined;
+	private oscillator: Oscillator | undefined;
+	private timing: TimingParams;
+	private beatQueue: number[];
+	private tapTempo: {
 		queue: number[];
 		timeout: number;
 	};
@@ -28,7 +30,7 @@ class Metronome {
 	onBeatCallback = () => {};
 
 	constructor(tempo = 120, audioContext?: AudioContext, params?: TimingParams) {
-		this.tempo = tempo;
+		this.internTempo = tempo;
 		this.audioContext = audioContext;
 		this.timing = {
 			...Metronome.DEF_PARAMS,
@@ -62,7 +64,7 @@ class Metronome {
 			this.beatQueue.push(this.timing.nextBeatTime);
 			this.oscillator.start(this.timing.nextBeatTime);
 			this.oscillator.stop(this.timing.nextBeatTime + this.timing.beatDuration);
-			const delta = 60.0 / this.tempo;
+			const delta = 60.0 / this.internTempo;
 			this.timing.nextBeatTime += delta;
 		}
 	}
@@ -90,6 +92,18 @@ class Metronome {
 		};
 		this.beatQueue = queue;
 		window.requestAnimationFrame(frameLoop);
+	}
+
+	get tempo() {
+		return this.internTempo;
+	}
+
+	/**
+	 * Set tempo of the quarter note, can be set while playing.
+	 * @param tempo bpm
+	 */
+	set tempo(tempo: number) {
+		this.internTempo = tempo;
 	}
 
 	/**
@@ -123,27 +137,23 @@ class Metronome {
 	}
 
 	/**
-	 * Set tempo of the quarter note, can be set while playing.
-	 * @param tempo bpm
-	 */
-	setTempo(tempo: number) {
-		this.tempo = tempo;
-	}
-
-	/**
 	 * Calcualte tap tempo, meant to be called on user interaction.
+	 * It calculates tempo by getting the average difference of time
+	 * between function calls, it resets after 1.5 seconds of no call.
+	 * If there are no sufficient timings to get the tempo, it returns undefined.
 	 */
 	getTapTempo() {
+		// Push the current time to the queue
 		this.tapTempo.queue.push(Date.now());
 
-		// Reset the queue clear timer
+		// Reset the queue clear timer on input
 		clearTimeout(this.tapTempo.timeout);
 
-		// Clear the time queue if no input was detected in 2 seconds
+		// Clear the time queue if no input was detected in 1.5 seconds after last input
 		this.tapTempo.timeout = setTimeout(() => {
 			this.tapTempo.queue = [];
 			console.log('cleared');
-		}, 2000);
+		}, 1500);
 
 		// Calculate the tempo from the input time deltas
 		if (this.tapTempo.queue.length > 1) {
@@ -152,7 +162,7 @@ class Metronome {
 				q
 					// Get the difference between times
 					.map((v, i) => q[i + 1] - v)
-					// Remove the NaN as difference will be arr.len - 1
+					// Remove the NaN as difference will be queue.len - 1
 					.filter((v) => v)
 					// Sum the differences
 					.reduce((c, p) => c + p) /
@@ -161,7 +171,8 @@ class Metronome {
 			return constrain(
 				Metronome.MIN,
 				Metronome.MAX,
-				Math.round(60 / (averageDelta / 1000))
+				// Calculate bpm, 60000ms = 1min, average delta is in ms so:
+				Math.round(60000 / averageDelta)
 			);
 		}
 	}
