@@ -1,6 +1,10 @@
 # Nertu
 
-Tuner webapp 🎷
+No-nonsense, easy to use tuner webapp 🎷
+
+Visit: [nertu.app](https://nertu.app)
+
+![App preview image](public/preview.png)
 
 # Desgin
 

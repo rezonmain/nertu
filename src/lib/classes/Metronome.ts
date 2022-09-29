@@ -5,8 +5,8 @@
  * Tap tempo implementation is of my own.
  */
 
-import constrain from '../utils/constrain';
 import Oscillator from './Oscillator';
+import constrain from '../utils/constrain';
 
 interface TimingParams {
 	lookAhead: number;
@@ -145,11 +145,8 @@ class Metronome {
 		// Reset the queue clear timer on input
 		clearTimeout(this.tapTempo.timeout);
 
-		// Clear the time queue if no input was detected in 1.5 seconds after last input
-		this.tapTempo.timeout = setTimeout(() => {
-			this.tapTempo.queue = [];
-			console.log('cleared');
-		}, 1500);
+		// Clear the times queue if no input was detected after 1.5 seconds
+		this.tapTempo.timeout = setTimeout(() => (this.tapTempo.queue = []), 1500);
 
 		// Calculate the tempo from the input time deltas
 		if (this.tapTempo.queue.length > 1) {
