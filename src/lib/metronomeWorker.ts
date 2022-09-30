@@ -1,4 +1,4 @@
-let id: number;
+let id: NodeJS.Timer;
 let interval = 25;
 
 self.onmessage = (e: MessageEvent) => {

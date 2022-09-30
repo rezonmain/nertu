@@ -146,7 +146,10 @@ class Metronome {
 		clearTimeout(this.tapTempo.timeout);
 
 		// Clear the times queue if no input was detected after 1.5 seconds
-		this.tapTempo.timeout = setTimeout(() => (this.tapTempo.queue = []), 1500);
+		this.tapTempo.timeout = window.setTimeout(
+			() => (this.tapTempo.queue = []),
+			1500
+		);
 
 		// Calculate the tempo from the input time deltas
 		if (this.tapTempo.queue.length > 1) {
