@@ -2,6 +2,13 @@
 
 No-nonsense, easy to use tuner webapp 🎷
 
+Features:
+
+- ✅ Chromatic tuner with instrument transposition and setting frequency for A<sub>4</sub>
+- ✅ Tuning fork
+- ✅ Tap tempo metronome
+- ✅ Usable offline as a progressive web app
+
 Visit: [nertu.app](https://nertu.app)
 
 <img width="450px" src="public/preview.png" alt="Nertu webapp preview" />
