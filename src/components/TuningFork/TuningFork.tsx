@@ -31,7 +31,7 @@ const TuningFork = () => {
 	};
 
 	useEffect(() => {
-		const frequency = new TET().toFrequency({ ...note, ref: settings.A });
+		const frequency = new TET(settings.A).toFrequency({ ...note });
 		oscillator.current?.setParams({ frequency });
 	});
 
