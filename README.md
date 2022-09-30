@@ -1,6 +1,6 @@
 # Nertu
 
-No-nonsense, easy to use tuner webapp 🎷
+No-nonsense, easy to use tuner web app 🎷
 
 Features:
 
