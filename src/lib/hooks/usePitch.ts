@@ -57,10 +57,10 @@ const usePitch = (existingAudioContext?: AudioContext) => {
 	};
 
 	const getMedia = () => {
+		const audioContext = existingAudioContext ?? new AudioContext();
 		navigator.mediaDevices
 			.getUserMedia({ audio: true })
 			.then((stream) => {
-				const audioContext = existingAudioContext ?? new AudioContext();
 				const analyser = audioContext.createAnalyser();
 				const detector = PitchDetector.forFloat32Array(analyser.fftSize);
 				audioContext.createMediaStreamSource(stream).connect(analyser);

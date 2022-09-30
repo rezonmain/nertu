@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
 import { FiMic } from 'react-icons/fi';
 
 const PermissionModal = ({
@@ -33,4 +34,4 @@ const PermissionModal = ({
 	);
 };
 
-export default PermissionModal;
+export default React.memo(PermissionModal);

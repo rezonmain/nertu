@@ -1,3 +1,4 @@
+import React from 'react';
 import SettingMenu from './SettingsMenu';
 import SettingsModal from './SettingsModal';
 
@@ -15,4 +16,4 @@ const Settings = ({
 	);
 };
 
-export default Settings;
+export default React.memo(Settings);

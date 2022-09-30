@@ -5,16 +5,15 @@ interface OscillatorParams {
 }
 
 class Oscillator {
-	private audioContext: AudioContext;
-	private oscillator: OscillatorNode | null;
-	private gainNode: GainNode;
+	private audioContext: AudioContext | undefined;
+	private oscillator: OscillatorNode | undefined;
+	private gainNode: GainNode | undefined;
 	private params: OscillatorParams;
 
-	constructor(audioContext = new AudioContext()) {
+	constructor(audioContext?: AudioContext) {
 		this.audioContext = audioContext;
-		this.oscillator = null;
-		this.gainNode = this.audioContext.createGain();
-		this.gainNode.connect(this.audioContext.destination);
+		this.oscillator = undefined;
+		this.gainNode = undefined;
 		this.params = Oscillator.DEF_PARAMS;
 	}
 
@@ -47,7 +46,7 @@ class Oscillator {
 
 	set amplitude(a: number) {
 		this.params.amplitude = a;
-		this.gainNode.gain.value = a;
+		if (this.gainNode) this.gainNode.gain.value = a;
 	}
 
 	get amplitude() {
@@ -66,7 +65,11 @@ class Oscillator {
 	}
 
 	start(when?: number) {
+		this.audioContext = this.audioContext ?? new AudioContext();
+		this.audioContext.resume();
 		this.oscillator = this.audioContext.createOscillator();
+		this.gainNode = this.gainNode ?? this.audioContext.createGain();
+		this.gainNode.connect(this.audioContext.destination);
 		this.oscillator.connect(this.gainNode);
 		this.gainNode.gain.value = this.params.amplitude;
 		this.oscillator.type = this.params.shape;

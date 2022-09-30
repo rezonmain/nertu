@@ -1,3 +1,4 @@
+import React from 'react';
 import { BsGear } from 'react-icons/bs';
 const Header = ({ onSettings }: { onSettings: () => void }) => {
 	return (
@@ -9,17 +10,17 @@ const Header = ({ onSettings }: { onSettings: () => void }) => {
 				<div id='icon'>
 					<span className='text-3xl'>nertu</span>
 				</div>
-				<div
+				<button
+					name='settings'
 					id='settings-icon'
-					role='button'
 					onClick={onSettings}
 					className='cursor-pointer hover:rotate-45 transition-transform p-2'
 				>
 					<BsGear size={30} />
-				</div>
+				</button>
 			</div>
 		</header>
 	);
 };
 
-export default Header;
+export default React.memo(Header);
