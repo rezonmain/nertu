@@ -16,25 +16,28 @@ const TuningFork = () => {
 		ref: settings.A,
 	});
 
+	// Update state params on form select
 	const onSelect = (e: ChangeEvent<HTMLSelectElement>) => {
 		const { name, value } = e.target;
 		setNote((prev) => ({
 			...prev,
 			[name]: name === 'octave' ? parseInt(value) : value,
-			ref: settings.A,
 		}));
 	};
 
+	// Toggle state and oscillator playing state
 	const onPlay = () => {
 		setplaying((prev) => !prev);
 		playing ? oscillator.current?.stop() : oscillator.current?.start();
 	};
 
+	// Update oscillator params on re-render
 	useEffect(() => {
 		const frequency = new TET(settings.A).toFrequency({ ...note });
-		oscillator.current?.setParams({ frequency });
+		oscillator.current?.setParams({ frequency, amplitude: 0.75 });
 	});
 
+	// Create oscillator object on mount
 	useEffect(() => {
 		oscillator.current = new Oscillator();
 	}, []);
@@ -43,17 +46,20 @@ const TuningFork = () => {
 		<article id='tuning-fork' className='flex flex-col gap-3 select-none'>
 			<div
 				onClick={onPlay}
-				id='playing-toggle'
-				className={`text-stone-300 border-stone-500 border-2 rounded-md cursor-pointer p-2 transition-colors ${
-					playing ? 'border-fuchsia-600' : ''
+				id='fork-toggle'
+				className={`border-2 rounded-md cursor-pointer p-2 transition-colors ${
+					playing
+						? 'border-fuchsia-600 text-stone-300'
+						: 'text-stone-500 border-stone-500'
 				}`}
 			>
 				<FiRadio size={24} className='mx-auto' />
 			</div>
-			<div id='controls' className='flex flex-row gap-3'>
-				<label className='flex flex-col'>
-					<small>pitch</small>
+			<div id='fork-controls' className='flex flex-row gap-3'>
+				<label id='pitch-controls' className='flex flex-col'>
+					<small>Pitch: </small>
 					<select
+						className='bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
 						name='noteName'
 						defaultValue={note.noteName}
 						onChange={onSelect}
@@ -68,9 +74,14 @@ const TuningFork = () => {
 						})}
 					</select>
 				</label>
-				<label className='flex flex-col'>
-					<small>oct</small>
-					<select name='octave' defaultValue={note.octave} onChange={onSelect}>
+				<label id='octave-controls' className='flex flex-col'>
+					<small>Octave: </small>
+					<select
+						className='bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
+						name='octave'
+						defaultValue={note.octave}
+						onChange={onSelect}
+					>
 						{Array.from({ length: 9 }).map((v, i) => {
 							return (
 								<option key={i} value={i}>
