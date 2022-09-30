@@ -31,7 +31,7 @@ const NoteIndicator = ({
 		>
 			<div
 				className={`flex flex-col gap-7 -rotate-45 ${
-					enharmonic && '-translate-y-3'
+					enharmonic ? '-translate-y-3' : ''
 				}`}
 			>
 				<p className='text-5xl block rotate-45 font-music'>

@@ -9,7 +9,9 @@ import Header from '../Header/Header';
 import Settings from '../Settings/Settings';
 import { useSettings } from '../../lib/context/settingsContext';
 import useDisclosure from '../../lib/hooks/useDisclosure';
-import MetronomeComponent from '../Metronome/Metronome';
+import MetronomeWidget from '../MetronomeWidget/MetronomeWidget';
+import TuningFork from '../TuningFork/TuningFork';
+import React from 'react';
 
 export interface TunerData extends Note, Pitch {}
 
@@ -53,12 +55,12 @@ function Tuner() {
 					id='widgets'
 					className='w-full px-5 flex flex-row justify-between sm:max-w-3xl xl:px-0 xl:max-w-5xl mx-auto'
 				>
-					<MetronomeComponent />
-					<div></div>
+					<MetronomeWidget />
+					<TuningFork />
 				</section>
 			</main>
 		</>
 	);
 }
 
-export default Tuner;
+export default React.memo(Tuner);

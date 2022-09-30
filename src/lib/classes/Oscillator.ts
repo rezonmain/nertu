@@ -5,10 +5,10 @@ interface OscillatorParams {
 }
 
 class Oscillator {
-	audioContext: AudioContext;
-	oscillator: OscillatorNode | null;
-	gainNode: GainNode;
-	params: OscillatorParams;
+	private audioContext: AudioContext;
+	private oscillator: OscillatorNode | null;
+	private gainNode: GainNode;
+	private params: OscillatorParams;
 
 	constructor(audioContext = new AudioContext()) {
 		this.audioContext = audioContext;
@@ -27,6 +27,11 @@ class Oscillator {
 			...this.params,
 			...params,
 		};
+		if (this.oscillator) {
+			this.oscillator.frequency.value = this.params.frequency;
+			this.oscillator.type = this.params.shape;
+		}
+		if (this.gainNode) this.gainNode.gain.value = this.params.amplitude;
 	}
 
 	set shape(type: OscillatorType) {

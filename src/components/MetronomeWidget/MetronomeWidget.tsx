@@ -5,7 +5,7 @@ import { useSettings } from '../../lib/context/settingsContext';
 import constrain from '../../lib/utils/constrain';
 import countNumeric from '../../lib/utils/countNumeric';
 
-const MetronomeComponent = () => {
+const MetronomeWidget = () => {
 	const [pingPong, setPingPong] = useState(false);
 	const metronome = useRef<Metronome | undefined>();
 	const { settings, dispatch } = useSettings();
@@ -114,4 +114,4 @@ const MetronomeComponent = () => {
 	);
 };
 
-export default React.memo(MetronomeComponent);
+export default React.memo(MetronomeWidget);
