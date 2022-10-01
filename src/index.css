@@ -10,11 +10,11 @@
 	box-sizing: border-box;
 	-webkit-tap-highlight-color: transparent;
 	color-scheme: dark;
+	scrollbar-width: none;
 }
 
 body {
 	background-color: black;
-	scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
