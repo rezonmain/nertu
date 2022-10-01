@@ -1,11 +1,6 @@
 import { PitchDetector } from 'pitchy';
 import { useEffect, useState } from 'react';
 
-/**
- *
- * @param existingAudioContext optional, provide an existing AudioContext otherwise a new instance of it is created
- * @returns
- */
 const usePitch = () => {
 	const [state, setState] = useState<{
 		media?: boolean;
