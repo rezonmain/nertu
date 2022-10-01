@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
  * @param existingAudioContext optional, provide an existing AudioContext otherwise a new instance of it is created
  * @returns
  */
-const usePitch = (existingAudioContext?: AudioContext) => {
+const usePitch = () => {
 	const [state, setState] = useState<{
 		media?: boolean;
 		audioContext?: AudioContext;
@@ -37,6 +37,7 @@ const usePitch = (existingAudioContext?: AudioContext) => {
 		let pitch = [0, 0];
 		let loudness = 0;
 		if (state.audioContext && state.detector && state.analyser) {
+			state.audioContext.resume();
 			const input = new Float32Array(state.detector.inputLength);
 			state.analyser.getFloatTimeDomainData(input);
 			const res = state.detector.findPitch(
@@ -56,28 +57,33 @@ const usePitch = (existingAudioContext?: AudioContext) => {
 		};
 	};
 
-	const getMedia = () => {
-		const audioContext = existingAudioContext ?? new AudioContext();
-		navigator.mediaDevices
-			.getUserMedia({ audio: true })
-			.then((stream) => {
-				const analyser = audioContext.createAnalyser();
-				const detector = PitchDetector.forFloat32Array(analyser.fftSize);
-				audioContext.createMediaStreamSource(stream).connect(analyser);
-				setState({
-					media: true,
-					audioContext,
-					analyser,
-					detector,
-				});
-			})
-			.catch((error) => {
-				alert(error);
-				setState({
-					media: false,
-					error,
-				});
+	const getMedia = async () => {
+		if (!navigator.mediaDevices) return;
+		const audioContext = new AudioContext();
+		const analyser = audioContext.createAnalyser();
+		const detector = PitchDetector.forFloat32Array(analyser.fftSize);
+		try {
+			const stream = await navigator.mediaDevices.getUserMedia({
+				audio: {
+					echoCancellation: false,
+					autoGainControl: false,
+					noiseSuppression: false,
+				},
 			});
+			audioContext.createMediaStreamSource(stream).connect(analyser);
+			setState({
+				media: true,
+				audioContext,
+				analyser,
+				detector,
+			});
+		} catch (err) {
+			alert(err);
+			setState({
+				media: false,
+				error: err as string,
+			});
+		}
 	};
 
 	useEffect(() => {
