@@ -59,7 +59,7 @@ const TuningFork = () => {
 				<label id='pitch-controls' className='flex flex-col'>
 					<small>Pitch: </small>
 					<select
-						className='bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
+						className='bg-black text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
 						name='noteName'
 						defaultValue={note.noteName}
 						onChange={onSelect}
@@ -77,7 +77,7 @@ const TuningFork = () => {
 				<label id='octave-controls' className='flex flex-col'>
 					<small>Octave: </small>
 					<select
-						className='bg-inherit text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
+						className='bg-black text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
 						name='octave'
 						defaultValue={note.octave}
 						onChange={onSelect}
