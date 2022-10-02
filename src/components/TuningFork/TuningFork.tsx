@@ -59,7 +59,7 @@ const TuningFork = () => {
 				<label id='pitch-controls' className='flex flex-col'>
 					<small>Pitch: </small>
 					<select
-						className='bg-black text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
+						className='bg-black font-music text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
 						name='noteName'
 						defaultValue={note.noteName}
 						onChange={onSelect}
@@ -67,7 +67,7 @@ const TuningFork = () => {
 						{Array.from({ length: 12 }).map((v, i) => {
 							const noteName = NoteMap[i + settings.noteNameSystem * 12];
 							return (
-								<option key={i} value={noteName}>
+								<option key={i} value={noteName} className='bg-stone-700'>
 									{noteName}
 								</option>
 							);
@@ -77,14 +77,14 @@ const TuningFork = () => {
 				<label id='octave-controls' className='flex flex-col'>
 					<small>Octave: </small>
 					<select
-						className='bg-black text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
+						className='bg-black font-music text-lg outline-none border-b-2 border-transparent transition-colors focus:border-b-fuchsia-600'
 						name='octave'
 						defaultValue={note.octave}
 						onChange={onSelect}
 					>
 						{Array.from({ length: 9 }).map((v, i) => {
 							return (
-								<option key={i} value={i}>
+								<option key={i} value={i} className='bg-stone-700'>
 									{i}
 								</option>
 							);
