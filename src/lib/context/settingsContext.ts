@@ -1,10 +1,10 @@
-import { createContext, Dispatch, useContext } from 'react';
-import { TunerSettings } from '../classes/TunerSettings';
-import { SettingsAction } from '../settingsReducer';
+import { createContext, Dispatch, useContext } from "react";
+import { TunerSettings } from "../classes/TunerSettings";
+import { SettingsAction } from "../settingsReducer";
 
 export type SettingsContext = {
-	settings: TunerSettings;
-	dispatch: Dispatch<SettingsAction>;
+  settings: TunerSettings;
+  dispatch: Dispatch<SettingsAction>;
 };
 
 /*
@@ -12,10 +12,10 @@ export type SettingsContext = {
  * otherwise use default settings
  */
 export const SettingsContext = createContext<SettingsContext>({
-	settings: (() => {
-		const saved = localStorage.getItem('settings');
-		return saved ? (JSON.parse(saved) as TunerSettings) : new TunerSettings();
-	})(),
-	dispatch: () => {},
+  settings: (() => {
+    const saved = localStorage.getItem("settings");
+    return saved ? (JSON.parse(saved) as TunerSettings) : new TunerSettings();
+  })(),
+  dispatch: () => {},
 });
 export const useSettings = () => useContext(SettingsContext);
