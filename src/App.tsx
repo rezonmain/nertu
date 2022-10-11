@@ -9,11 +9,9 @@ function App() {
   const [init, dispatch] = useReducer(settingsReducer, settings);
   return (
     <Layout>
-      <>
-        <SettingsContext.Provider value={{ settings: init, dispatch }}>
-          <Tuner />
-        </SettingsContext.Provider>
-      </>
+      <SettingsContext.Provider value={{ settings: init, dispatch }}>
+        <Tuner />
+      </SettingsContext.Provider>
     </Layout>
   );
 }
